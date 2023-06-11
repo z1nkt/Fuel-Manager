@@ -14,14 +14,28 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row ="1"  Margin="0,60,0,251">
+            <Button Content ="Tanken"></Button>
+        </StackPanel>
 
-        <StackPanel>
+        <StackPanel Grid.Row ="1"  Margin="0,217,0,0">
+            <TextBlock >Administration</TextBlock>
             <Button Content="Fahrzeuge" Command="{Binding OpenCarCommand}" />
             <Button Content="Mitarbeiter" Command="{Binding OpenEmployeeCommand}" />
         </StackPanel>
-
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" ShowsPreview="True" Width="5" />
-        <ContentControl Grid.Column="1" Content="{Binding ActiveViewModel}" ContentTemplateSelector="{StaticResource TemplateSelector}">
+        <StackPanel Grid.Column="1"  HorizontalAlignment="Left" Orientation="Horizontal">
+            <Button Command="{Binding NewCommand}" Content="Neu" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
+            <!--<Button Command="{Binding EditCommand}" Content="Bearbeiten" Width="NaN" Margin="0,0,10,0"/>-->
+            <Button Command="{Binding SaveCommand}" Content="Speichern" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
+            <Button Command="{Binding DeleteCommand}" Content="Löschen" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
+            <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C"/>
+        </StackPanel>
+        <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" ShowsPreview="True" Width="5" />
+        <ContentControl Grid.Column="1" Content="{Binding ActiveViewModel}" ContentTemplateSelector="{StaticResource TemplateSelector}" Margin="0,60,0,0">
             <ContentControl.Resources>
                 <DataTemplate x:Key="employeeViewTemplate">
                     <local:EmployeeView />
