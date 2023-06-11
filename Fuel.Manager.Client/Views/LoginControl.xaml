@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="Fuel.Manager.Client.Views.LoginControl"
+﻿<Window x:Class="Fuel.Manager.Client.Views.LoginControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
-        mc:Ignorable="d" Height="450" Width="800">
+        mc:Ignorable="d" Height="450" Width="800" Background="#eee">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="30">
             <TextBlock TextAlignment="Center" FontSize="30">Fuel Manager</TextBlock>
@@ -13,18 +13,18 @@
                     <Label>Username</Label>
                     <TextBox TabIndex="0"
                              HorizontalContentAlignment="Center"
-                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Username}"/>
                 </StackPanel>
                 <StackPanel>
                     <Label>Password</Label>
                     <TextBox TabIndex="1"
                              HorizontalContentAlignment="Center"
-                             Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Password}"/>
                 </StackPanel>
-                <Button Margin="0 20 0 0" Command="{Binding Login}" TabIndex="2">Login</Button>
+                <Button Margin="0 20 0 0" Command="{Binding LoginCommand}" TabIndex="2">Login</Button>
             </StackPanel>
             <TextBlock Margin="5" Text="{Binding ErrorMessage, Mode=TwoWay}" Foreground="Red"
                        TextAlignment="Center" TextWrapping="Wrap"/>
         </StackPanel>
     </Grid>
-</UserControl>
+</Window>

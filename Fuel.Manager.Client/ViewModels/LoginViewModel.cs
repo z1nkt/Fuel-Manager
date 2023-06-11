@@ -12,7 +12,7 @@ namespace Fuel.Manager.Client.ViewModels
     {
         private string _userName;
 
-        public String Username
+        public string Username
         {
             get => _userName;
             set

@@ -3,12 +3,16 @@ using Fuel.Manager.Client.ViewModels;
 using Fuel.Manager.Client.Views;
 using System;
 using Fuel.Manager.Client.Framework;
+using Fuel.Manager.Client.Models;
 
 namespace Fuel.Manager.Client.Controllers
 {
     public class MainWindowController
     {
         private MainWindowViewModel mMainWindowViewModel;
+        private MainWindow mView;
+        private App mApplication;
+        private Employee loggedInUser;
 
         public void Initialize()
         {

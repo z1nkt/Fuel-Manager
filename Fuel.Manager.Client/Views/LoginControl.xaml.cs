@@ -17,7 +17,7 @@ namespace Fuel.Manager.Client.Views
     /// <summary>
     /// Interaktionslogik für LoginControl.xaml
     /// </summary>
-    public partial class LoginControl : UserControl
+    public partial class LoginControl : Window
     {
         public LoginControl()
         {
