@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fuel.Manager.Client.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,10 @@ namespace Fuel.Manager.Client
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var controller = new MainWindowController();
+            controller.Initialize();
+        }
     }
 }

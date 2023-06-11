@@ -12,6 +12,15 @@ namespace Fuel.Manager.Server.Helper
         private static ISessionFactory mSessionFactory;
         public static readonly string DatabaseFile = "database.db";
 
+        public NHibernateHelper()
+        {
+            mSessionFactory = Fluently.Configure()
+                .Database(SQLiteConfiguration.Standard.UsingFile(DatabaseFile).ShowSql())
+                .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly())
+                    .Conventions.Add(FluentNHibernate.Conventions.Helpers.DefaultLazy.Never()))
+                .BuildSessionFactory();
+        }
+
         private static ISessionFactory SessionFactory
         {
             get
@@ -34,6 +43,11 @@ namespace Fuel.Manager.Server.Helper
                 .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly())
                     .Conventions.Add(FluentNHibernate.Conventions.Helpers.DefaultLazy.Never()))
                 .BuildSessionFactory();
+        }
+
+        public ISessionFactory CreateSession()
+        {
+            return mSessionFactory;
         }
     }
 }

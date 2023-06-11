@@ -1,6 +1,10 @@
-﻿namespace Fuel.Manager.Server.Repositories.Interfaces
+﻿using Fuel.Manager.Server.Models;
+
+namespace Fuel.Manager.Server.Repositories.Interfaces
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository : IRepository<Employee>
     {
+        public Employee FindByEmployeeNumber (string  employeeNumber);
+        public Employee GetByUsername(string username);
     }
 }

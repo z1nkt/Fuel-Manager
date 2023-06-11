@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Fuel.Manager.Client.Framework;
+using Fuel.Manager.Client.ViewModels;
 
 namespace Fuel.Manager.Client.Controllers
 {
-    internal class LoginController
+    public class LoginController : SubmoduleController
     {
+        public override ViewModelBase Initialize()
+        {
+            return new LoginViewModel();
+        }
     }
+
 }

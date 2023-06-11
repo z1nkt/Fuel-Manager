@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Aufgabe_13.Framework
+namespace Fuel.Manager.Client.Framework
 {
 	public class RelayCommand : ICommand
 	{

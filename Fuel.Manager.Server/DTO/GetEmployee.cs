@@ -1,28 +1,13 @@
-﻿namespace Fuel.Manager.Server.Models
+﻿namespace Fuel.Manager.Server.DTO
 {
-    public class Employee 
+    public class GetEmployee
     {
         public int Id { get; set; }
-
         public string Username { get; set; }
-
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-
         public string EmployeeNo { get; set; }
-
-        public string Password { get; set; }
-
         public bool IsAdmin { get; set; }
-
         public int Version { get; set; }
-
-        public IList<Car> Cars { get; set; }
-
-        public Employee()
-        {
-            Cars = new List<Car>();
-        }
-
     }
 }

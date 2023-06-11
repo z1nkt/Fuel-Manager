@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fuel.Manager.Client.Controllers
 {
-    internal class ControllerBase
+    public class RefuelController
     {
     }
 }

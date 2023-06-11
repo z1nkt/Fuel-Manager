@@ -1,14 +1,13 @@
-﻿<Window x:Class="Fuel.Manager.Client.Views.LoginControl"
+﻿<UserControl x:Class="Fuel.Manager.Client.Views.LoginControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
-        mc:Ignorable="d"
-        Title="LoginControl" Height="450" Width="800">
+        mc:Ignorable="d" Height="450" Width="800">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="30">
-            <TextBlock TextAlignment="Center" FontSize="30">FleetManagement</TextBlock>
+            <TextBlock TextAlignment="Center" FontSize="30">Fuel Manager</TextBlock>
             <StackPanel Width="200">
                 <StackPanel Margin="0 10">
                     <Label>Username</Label>
@@ -28,4 +27,4 @@
                        TextAlignment="Center" TextWrapping="Wrap"/>
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>

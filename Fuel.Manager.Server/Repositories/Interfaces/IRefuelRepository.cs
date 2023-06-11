@@ -1,6 +1,9 @@
-﻿namespace Fuel.Manager.Server.Repositories.Interfaces
+﻿using Fuel.Manager.Server.Models;
+
+namespace Fuel.Manager.Server.Repositories.Interfaces
 {
-    public class IRefuelRepository
+    public interface IRefuelRepository : IRepository<Refuel>
     {
+        public IList<Refuel> GetRefuelsByCar(Car car);
     }
 }

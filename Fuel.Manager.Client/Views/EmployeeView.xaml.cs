@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Fuel.Manager.Client.Views
 {
     /// <summary>
-    /// Interaktionslogik für LoginControl.xaml
+    /// Interaktionslogik für EmployeeView.xaml
     /// </summary>
-    public partial class LoginControl : UserControl
+    public partial class EmployeeView : UserControl
     {
-        public LoginControl()
+        public EmployeeView()
         {
             InitializeComponent();
         }
