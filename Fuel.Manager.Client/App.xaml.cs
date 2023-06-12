@@ -33,7 +33,7 @@ namespace Fuel.Manager.Client
 
             using (var scope = Container.BeginLifetimeScope())
             {
-                var mainController = scope.Resolve<LoginController>();
+                var mainController = scope.Resolve<MainWindowController>();
                 mainController.Initialize();
             }
         }

@@ -18,15 +18,6 @@ namespace Fuel.Manager.Client.Controllers
         private LoginViewModel mViewModel;
 
         private Employee employee;
-        public void Initialize()
-        {
-            mView = new LoginControl();
-            mViewModel = new LoginViewModel();
-
-            mView.DataContext = mViewModel;
-            mViewModel.LoginCommand = new RelayCommand(ExecuteLoginCommand);
-            mView.ShowDialog();
-        }
 
         public LoginController(LoginControl loginControl, LoginViewModel loginViewModel)
         {

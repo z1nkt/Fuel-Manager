@@ -1,11 +1,68 @@
-﻿<UserControl x:Class="Fuel.Manager.Client.Views.EmployeeView"
+﻿<Page x:Class="Fuel.Manager.Client.Views.EmployeeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Text="{Binding HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
-</UserControl>
+    <StackPanel>
+        <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Margin="0,0,0,5" MaxHeight="130" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="130">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Employee}">
+                    <WrapPanel>
+                        <TextBlock Text="{Binding EmployeeNo}" MinWidth="120" MaxWidth="120"/>
+                        <TextBlock Text="{Binding Firstname}" MinWidth="120" MaxWidth="120"/>
+                        <TextBlock Text="{Binding Lastname}" MinWidth="120" MaxWidth="120"/>
+                        <TextBlock Text="{Binding IsAdmin}" MinWidth="120" MaxWidth="120"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <WrapPanel>
+            <StackPanel Margin="0,0,20,0">
+                <WrapPanel Margin="0,0,0,5">
+                    <Label Content="Personalnummer" MinWidth="100"/>
+                    <TextBox Text="{Binding EmployeeNo}" MinWidth="100"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,0,0,5">
+                    <Label Content="Benutzername" MinWidth="100"/>
+                    <TextBox Text="{Binding Username}" MinWidth="100"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,0,0,5">
+                    <Label Content="Passwort" MinWidth="100"/>
+                    <PasswordBox x:Name="keinMVVMC" MinWidth="100"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,0,0,5">
+                    <Label Content="Vorname" MinWidth="100"/>
+                    <TextBox Text="{Binding Firstname}" MinWidth="100"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,0,0,5">
+                    <Label Content="Nachname" MinWidth="100"/>
+                    <TextBox Text="{Binding Lastname}" MinWidth="100"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,0,0,5">
+                    <Label Content="Administrator" MinWidth="100"/>
+                    <CheckBox IsChecked="{Binding IsAdmin}" MinWidth="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                </WrapPanel>
+            </StackPanel>
+            <StackPanel>
+                <WrapPanel Margin="0,0,0,10">
+                    <Button Command="{Binding AddCarCommand}" Content="Hinzufügen" Margin="0,0,5,0"/>
+                    <Button Command="{Binding RemoveCarCommand}" Content="Entfernen"/>
+                </WrapPanel>
+                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="280" MaxWidth="280" MinHeight="150" MaxHeight="150">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Car}">
+                            <WrapPanel>
+                                <TextBlock Text="{Binding LicensePlate}" MinWidth="90" MaxWidth="90"/>
+                                <TextBlock Text="{Binding Vendor}" MinWidth="90" MaxWidth="90"/>
+                                <TextBlock Text="{Binding Model}" MinWidth="90" MaxWidth="90"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </WrapPanel>
+    </StackPanel>
+</Page>

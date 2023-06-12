@@ -1,12 +1,50 @@
-﻿<UserControl x:Class="Fuel.Manager.Client.Views.RefuelView"
+﻿<Page x:Class="Fuel.Manager.Client.Views.RefuelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
+             xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
-</UserControl>
+    <StackPanel>
+        <ListBox ItemsSource="{Binding Refuels}" SelectedItem="{Binding SelectedRefuel}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Refuel}">
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Date, StringFormat='dd-MM-yyyy'}" MinWidth="160" MaxWidth="200"/>
+                        <TextBlock Text="{Binding Car.LicensePlate}" MinWidth="160" MaxWidth="150"/>
+                        <TextBlock Text="{Binding Price}" MinWidth="160" MaxWidth="150"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Fahrzeug" MinWidth="100"/>
+            <ComboBox MinWidth="100" ItemsSource="{Binding Path=Cars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:Car}">
+                        <TextBlock Text="{Binding LicensePlate}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </WrapPanel>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Datum" MinWidth="100"/>
+            <DatePicker MinWidth="100" SelectedDate="{Binding RefuelDate}"/>
+            <Button HorizontalAlignment="Center" Content="Heute" Command="{Binding TodayCommand}" MinWidth="100" Margin="15,0,0,0" />
+        </WrapPanel>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Kilometerstand" MinWidth="100"/>
+            <TextBox MinWidth="100" Text="{Binding Mileage}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Liter (getankt)" MinWidth="100"/>
+            <TextBox MinWidth="100" Text="{Binding Amount}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Preis (bezahlt)" MinWidth="100"/>
+            <TextBox MinWidth="100" Text="{Binding Price}"/>
+        </WrapPanel>
+    </StackPanel>
+</Page>

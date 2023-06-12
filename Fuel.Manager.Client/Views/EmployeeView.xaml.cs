@@ -18,7 +18,7 @@ namespace Fuel.Manager.Client.Views
     /// <summary>
     /// Interaktionslogik für EmployeeView.xaml
     /// </summary>
-    public partial class EmployeeView : UserControl
+    public partial class EmployeeView : Page
     {
         public EmployeeView()
         {

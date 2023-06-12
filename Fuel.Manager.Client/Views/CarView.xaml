@@ -1,11 +1,34 @@
-﻿<UserControl x:Class="Fuel.Manager.Client.Views.CarView"
+﻿<Page x:Class="Fuel.Manager.Client.Views.CarView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
+        xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
         mc:Ignorable="d">
-    <Grid Height="300" Width="300">
-        <TextBlock Text="{Binding HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
-</UserControl>
+    <StackPanel>
+        <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Car}">
+                    <WrapPanel>
+                        <TextBlock Text="{Binding LicensePlate}" MinWidth="160" MaxWidth="200"/>
+                        <TextBlock Text="{Binding Vendor}" MinWidth="160" MaxWidth="150"/>
+                        <TextBlock Text="{Binding Model}" MinWidth="160" MaxWidth="150"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Kennzeichen" MinWidth="100"/>
+            <TextBox Text="{Binding LicensePlate}" MinWidth="100"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Hersteller" MinWidth="100"/>
+            <TextBox Text="{Binding Vendor}" MinWidth="100"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,0,0,5">
+            <Label Content="Modell" MinWidth="100"/>
+            <TextBox Text="{Binding Model}" MinWidth="100"/>
+        </WrapPanel>
+    </StackPanel>
+</Page>

@@ -17,7 +17,7 @@ namespace Fuel.Manager.Client.Views
     /// <summary>
     /// Interaktionslogik für CarView.xaml
     /// </summary>
-    public partial class CarView : UserControl
+    public partial class CarView : Page
     {
         public CarView()
         {

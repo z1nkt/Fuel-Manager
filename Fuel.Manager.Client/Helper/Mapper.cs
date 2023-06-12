@@ -35,5 +35,10 @@ namespace Fuel.Manager.Client.Helper
         {
             return JsonConvert.SerializeObject(employee);
         }
+
+        public static string RefuelToJson(Refuel refuel)
+        {
+            return JsonConvert.SerializeObject(refuel);
+        }
     }
 }
