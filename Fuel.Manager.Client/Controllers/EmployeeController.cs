@@ -19,6 +19,7 @@ namespace Fuel.Manager.Client.Controllers
 
         private AddCarToEmployeeController mAddCarToEmployeeController;
         private App mApplication;
+        public string host = "http://localhost:4269/api/";
 
         public EmployeeController(EmployeeView view, EmployeeViewModel viewModel, App app)
         {
@@ -44,7 +45,7 @@ namespace Fuel.Manager.Client.Controllers
 
             var values = JsonHelper.DictionaryToJson(data);
 
-            var response = await client.PostAsync("http://localhost:4269/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync($"{host}employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
             var responseString = await response.Content.ReadAsStringAsync();
 
             List<Car> cars = Mapper.JsonToCarList(responseString);
@@ -164,7 +165,7 @@ namespace Fuel.Manager.Client.Controllers
 
                  var values = JsonHelper.DictionaryToJson(data);
 
-                 await client.PostAsync("http://localhost:3000/api/employee/car/add", new StringContent(values, Encoding.UTF8, "application/json"));
+                 await client.PostAsync($"{host}api/employee/car/add", new StringContent(values, Encoding.UTF8, "application/json"));
 
                  if (!(car == null))
                  {
@@ -189,7 +190,7 @@ namespace Fuel.Manager.Client.Controllers
 
                 var values = JsonHelper.DictionaryToJson(data);
 
-                await client.PostAsync("http://localhost:3000/api/employee/car/delete", new StringContent(values, Encoding.UTF8, "application/json"));
+                await client.PostAsync($"{host}employee/car/delete", new StringContent(values, Encoding.UTF8, "application/json"));
 
                 mViewModel.Cars.Remove(mViewModel.SelectedCar);
             }
@@ -199,7 +200,7 @@ namespace Fuel.Manager.Client.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = await client.GetAsync("http://localhost:3000/api/cars");
+            var response = await client.GetAsync($"{host}cars");
             var responseString = await response.Content.ReadAsStringAsync();
 
             List<Car> allCars = Mapper.JsonToCarList(responseString);
