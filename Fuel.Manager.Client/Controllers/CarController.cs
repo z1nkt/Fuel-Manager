@@ -76,5 +76,10 @@ namespace Fuel.Manager.Client.Controllers
                 mViewModel.SelectedCar = mViewModel.Cars.First();
             }
         }
+
+        public void SetIsEnabled(bool enable)
+        {
+            mViewModel.IsEnabled = enable;
+        }
     }
 }

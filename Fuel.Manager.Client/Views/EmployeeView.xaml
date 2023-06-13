@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
+             xmlns:helper="clr-namespace:Fuel.Manager.Client.Helper"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
@@ -20,7 +21,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <WrapPanel>
-            <StackPanel Margin="0,0,20,0">
+            <StackPanel Margin="0,0,20,0" IsEnabled="{Binding IsEnabled}">
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Personalnummer" MinWidth="100"/>
                     <TextBox Text="{Binding EmployeeNo}" MinWidth="100"/>
@@ -31,7 +32,7 @@
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Passwort" MinWidth="100"/>
-                    <PasswordBox x:Name="keinMVVMC" MinWidth="100"/>
+                    <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" MinWidth="100" Width="90" />
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Vorname" MinWidth="100"/>

@@ -19,6 +19,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel IsEnabled="{Binding IsEnabled}" >
         <WrapPanel Margin="0,0,0,5">
             <Label Content="Fahrzeug" MinWidth="100"/>
             <ComboBox MinWidth="100" ItemsSource="{Binding Path=Cars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
@@ -46,5 +47,6 @@
             <Label Content="Preis (bezahlt)" MinWidth="100"/>
             <TextBox MinWidth="100" Text="{Binding Price}"/>
         </WrapPanel>
+        </StackPanel>
     </StackPanel>
 </Page>

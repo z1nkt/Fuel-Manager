@@ -70,7 +70,21 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
 
                 _ErrorMessage = value;
-                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+        private string _SuccessMessage;
+        public string SuccessMessage
+        {
+            get { return _SuccessMessage; }
+            set
+            {
+                if (value == _SuccessMessage)
+                    return;
+
+                _SuccessMessage = value;
+                OnPropertyChanged(nameof(SuccessMessage));
             }
         }
 

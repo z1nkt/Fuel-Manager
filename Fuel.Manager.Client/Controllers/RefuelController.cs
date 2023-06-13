@@ -90,5 +90,10 @@ namespace Fuel.Manager.Client.Controllers
                 mViewModel.SelectedRefuel = mViewModel.Refuels.First();
             }
         }
+
+        public void SetIsEnabled(bool enable)
+        {
+            mViewModel.IsEnabled = enable;
+        }
     }
 }

@@ -75,7 +75,7 @@ namespace Fuel.Manager.Client.Controllers
                     GetAllEmployees();
                     //set EmployeeController data
                     EmployeeController.SetControllerData(allEmployees);
-                    EmployeeController.SetFirstEmployee();
+                   // EmployeeController.SetFirstEmployee();
                     break;
             }
         }
@@ -83,6 +83,7 @@ namespace Fuel.Manager.Client.Controllers
         public async void ExecuteNewCommand(Object o)
         {
             mViewModel.ErrorMessage = "";
+            mViewModel.SuccessMessage = "";
             HttpClient client;
             string values;
             HttpResponseMessage response;
@@ -106,6 +107,7 @@ namespace Fuel.Manager.Client.Controllers
                     }
 
                     GetCarsAndRefuelsFromLoggedInEmployee();
+                    mViewModel.SuccessMessage = "Tanken wurde erfolgreich angelegt";
                     break;
                 case "Fahrzeuge":
                     bool licenseOk = true;
@@ -138,6 +140,7 @@ namespace Fuel.Manager.Client.Controllers
                     }
 
                     GetAllCars();
+                    mViewModel.SuccessMessage = "Fahrzeug wurde erfolgreich angelegt";
                     break;
                 case "Mitarbeiter":
                     bool nameOk = true;
@@ -211,7 +214,7 @@ namespace Fuel.Manager.Client.Controllers
                         { "version", "1"}
                     };
 
-                    EmployeeController.ResetEmployeePassword();
+                    //EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
                     response = await client.PostAsync("http://localhost:4269/api/employee/new", new StringContent(values, Encoding.UTF8, "application/json"));
@@ -222,35 +225,35 @@ namespace Fuel.Manager.Client.Controllers
                     }
 
                     GetAllEmployees();
+                    mViewModel.SuccessMessage = "Mitarbeiter wurde erfolgreich angelegt";
                     break;
             }
         }
 
         public void ExecuteEditCommand(Object o)
         {
-            /*mViewModel.ErrorMessage = "";
-
             switch (mViewModel.SelectedMode)
             {
-                case "Tanken":
-                    //save edited Refuel object on Server
-                    RefuelController.GetRefuel();
-                    //Request list of Cars and Refuels from Client
-                    //RefuelController.SetControllerData();
-                    break;
-                case "Fahrzeuge":
-                    
-
-                    break;
                 case "Mitarbeiter":
+                    EmployeeController.SetIsEnabled(true);
                     break;
-            }*/
 
-            //später entfernen
+                /*case "Tanken":
+                    RefuelController.SetIsEnabled(true);
+                    break;
+
+                case "Fahrzeug":
+                    CarController.SetIsEnabled(true);
+                    break;*/
+
+
+            }
+
         }
 
         public async void ExecuteSaveCommand(Object o)
         {
+            SetIsEnabledForAll(false);
             mViewModel.ErrorMessage = "";
             HttpClient client;
             string values;
@@ -350,7 +353,7 @@ namespace Fuel.Manager.Client.Controllers
                         { "version", editedEmployee.Version.ToString()}
                     };
 
-                    EmployeeController.ResetEmployeePassword();
+                    //EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
                     response = await client.PostAsync("http://localhost:4269/api/employee/edit", new StringContent(values, Encoding.UTF8, "application/json"));
@@ -361,7 +364,7 @@ namespace Fuel.Manager.Client.Controllers
                     }
 
                     GetAllEmployees();
-                    EmployeeController.SetFirstEmployee();
+                    //EmployeeController.SetFirstEmployee();
                     break;
             }
         }
@@ -450,7 +453,7 @@ namespace Fuel.Manager.Client.Controllers
                         { "version", deletedEmployee.Version.ToString()}
                     };
 
-                    EmployeeController.ResetEmployeePassword();
+                    //EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
                     response = await client.PostAsync("http://localhost:4269/api/employee/delete", new StringContent(values, Encoding.UTF8, "application/json"));
@@ -542,6 +545,13 @@ namespace Fuel.Manager.Client.Controllers
             mViewModel.IsAdmin(loggedInUser.IsAdmin);
 
             mView.Show();
+        }
+
+        public void SetIsEnabledForAll(bool isEnabledForAll)
+        {
+            EmployeeController.SetIsEnabled(isEnabledForAll);
+            RefuelController.SetIsEnabled(isEnabledForAll);
+            CarController.SetIsEnabled(isEnabledForAll);
         }
 
     }

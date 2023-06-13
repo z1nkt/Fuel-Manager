@@ -159,7 +159,23 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _Password = value;
-                OnPropertyChanged("Password");
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+
+        private bool _IsEnabled;
+
+        public bool IsEnabled
+        {
+            get { return _IsEnabled; }
+            set
+            {
+                if (value == _IsEnabled)
+                {
+                    return;
+                }
+                _IsEnabled = value;
+                OnPropertyChanged(nameof(IsEnabled));
             }
         }
     }

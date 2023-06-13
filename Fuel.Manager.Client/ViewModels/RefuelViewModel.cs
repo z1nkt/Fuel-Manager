@@ -125,6 +125,24 @@ namespace Fuel.Manager.Client.ViewModels
             }
         }
 
+        private bool _IsEnabled;
+
+        public bool IsEnabled
+        {
+            get { return _IsEnabled; }
+            set
+            {
+                if (value == _IsEnabled)
+                {
+                    return;
+                }
+
+                _IsEnabled = value;
+                OnPropertyChanged(nameof(IsEnabled));
+            }
+        }
+
+
         public RefuelViewModel()
         {
             Cars = new ObservableCollection<Car>();

@@ -9,10 +9,11 @@
     <DockPanel LastChildFill="False" Margin="15,15,0,0">
         <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,20">
             <Button Command="{Binding NewCommand}" Content="Neu" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
-            <!--<Button Command="{Binding EditCommand}" Content="Bearbeiten" Width="NaN" Margin="0,0,10,0"/>-->
+            <Button Command="{Binding EditCommand}" Content="Bearbeiten" Width="NaN" Margin="0,0,10,0"/>
             <Button Command="{Binding SaveCommand}" Content="Speichern" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
             <Button Command="{Binding DeleteCommand}" Content="Löschen" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
-            <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C"/>
+            <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
+            <Label Content="{Binding SuccesMessage}" Foreground="#FF60DA1C" FontWeight="Bold"/>
         </WrapPanel>
         <StackPanel DockPanel.Dock="Left" MinWidth="200" Margin="0,0,22,0">
             <Label Content="Modus"/>

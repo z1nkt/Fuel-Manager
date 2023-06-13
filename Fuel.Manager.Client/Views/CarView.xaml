@@ -18,17 +18,20 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <WrapPanel Margin="0,0,0,5">
-            <Label Content="Kennzeichen" MinWidth="100"/>
-            <TextBox Text="{Binding LicensePlate}" MinWidth="100"/>
-        </WrapPanel>
-        <WrapPanel Margin="0,0,0,5">
-            <Label Content="Hersteller" MinWidth="100"/>
-            <TextBox Text="{Binding Vendor}" MinWidth="100"/>
-        </WrapPanel>
-        <WrapPanel Margin="0,0,0,5">
-            <Label Content="Modell" MinWidth="100"/>
-            <TextBox Text="{Binding Model}" MinWidth="100"/>
-        </WrapPanel>
+        <StackPanel IsEnabled="{Binding IsEnabled}">
+            <WrapPanel Margin="0,0,0,5">
+                <Label Content="Kennzeichen" MinWidth="100"/>
+                <TextBox Text="{Binding LicensePlate}" MinWidth="100"/>
+            </WrapPanel>
+            <WrapPanel Margin="0,0,0,5">
+                <Label Content="Hersteller" MinWidth="100"/>
+                <TextBox Text="{Binding Vendor}" MinWidth="100"/>
+            </WrapPanel>
+            <WrapPanel Margin="0,0,0,5">
+                <Label Content="Modell" MinWidth="100"/>
+                <TextBox Text="{Binding Model}" MinWidth="100"/>
+            </WrapPanel>
+        </StackPanel>
+
     </StackPanel>
 </Page>
