@@ -15,7 +15,11 @@ namespace Fuel.Manager.Server.Repositories.Implementation
 
         public IList<Refuel> GetRefuelsByCar(Car car)
         {
-            throw new NotImplementedException();
+            using (var session = _nhibernateHelper.OpenSession())
+            {
+                return session.Query<Refuel>().Where(r => r.Car == car).ToList();
+            }
+
         }
     }
 }
