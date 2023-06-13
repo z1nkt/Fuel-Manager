@@ -185,10 +185,8 @@ namespace Fuel.Manager.Server
         {
             try
             {
-                Console.WriteLine(addEmployee.Password);
                 addEmployee.Password = BCrypt.Net.BCrypt.HashPassword(addEmployee.Password);
                 Employee e = new Employee();
-                Console.WriteLine(addEmployee.Password);
 
                 e.EmployeeNo = addEmployee.EmployeeNo;
                 e.Username = addEmployee.Username;
