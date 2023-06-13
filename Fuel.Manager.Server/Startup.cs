@@ -15,16 +15,16 @@ namespace Fuel.Manager.Server
             NHibernateHelper nHibernateHelper = new NHibernateHelper();
             var session = nHibernateHelper.CreateSession();
 
-            //builder.RegisterInstance(new EmployeeRepository(session)).As<EmployeeRepository>();
+            builder.RegisterInstance(new EmployeeRepository(session)).As<EmployeeRepository>();
             builder.RegisterInstance(new CarService(new CarRepository(session))).As<ICarService>();
             builder.RegisterInstance(new RefuelService(new RefuelRepository(session))).As<IRefuelService>();
             builder.RegisterInstance(new EmployeeService(new EmployeeRepository(session))).As<IEmployeeService>();
-            //builder.RegisterInstance(new EmployeeToCarRelationService(new EmployeeToCarRelationRepository(session), new EmployeeRepository(session))).As<IEmployeeToCarRelationService>();
+            builder.RegisterInstance(new EmployeeToCarRelationService(new EmployeeToCarRelationRepository(session), new EmployeeRepository(session))).As<IEmployeeToCarRelationService>();
 
             var container = builder.Build();
             using (var scope = container.BeginLifetimeScope())
             {
-                RepositoryMapperController controller = new RepositoryMapperController(scope.Resolve<ICarService>(), scope.Resolve<IEmployeeService>(), scope.Resolve<IRefuelService>()/*, scope.Resolve<IEmployeeToCarRelationService>()*/);
+                RepositoryMapperController controller = new RepositoryMapperController(scope.Resolve<ICarService>(), scope.Resolve<IEmployeeService>(), scope.Resolve<IRefuelService>(), scope.Resolve<IEmployeeToCarRelationService>());
 
                 controller.StartUp();
             }
