@@ -17,12 +17,5 @@
 
         public int Version { get; set; }
 
-        public IList<Car> Cars { get; set; }
-
-        public Employee()
-        {
-            Cars = new List<Car>();
-        }
-
     }
 }

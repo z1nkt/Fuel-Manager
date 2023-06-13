@@ -58,9 +58,13 @@ namespace Fuel.Manager.Server.Services.Implementation
             }
         }
 
-        public void ChangePassword(string username, string oldP, string newP)
+        public void ChangePassword(string username, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            Employee e = _employeeRepository.GetByUsername(username);
+            e.Password = BCrypt.Net.BCrypt.ValidateAndReplacePassword(oldPassword, e.Password, newPassword);
+            
+
+            _employeeRepository.Update(e);
         }
     }
 }

@@ -25,13 +25,6 @@ namespace Fuel.Manager.Server.Mappings
                 .Column("Version")
                 .Not.Nullable();
 
-            HasManyToMany(x => x.Employees)
-                .Table("EmployeeToCarRelations")
-                .ParentKeyColumn("EmployeeId")
-                .ChildKeyColumn("CarId")
-                .Cascade.All()
-                .Inverse();
-
 
         }
     }

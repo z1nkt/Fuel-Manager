@@ -4,6 +4,6 @@ namespace Fuel.Manager.Server.Repositories.Interfaces
 {
     public interface ICarRepository : IRepository<Car>
     {
-        Car FindByLicensePlate(string licensePlate);
+
     }
 }

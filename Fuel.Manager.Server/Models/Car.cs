@@ -8,11 +8,6 @@
         public string Model { get; set; }
         public int Version { get; set; }
 
-        public IList<Employee> Employees { get; set; }
 
-        public Car()
-        {
-            Employees = new List<Employee>();
-        }
     }
 }

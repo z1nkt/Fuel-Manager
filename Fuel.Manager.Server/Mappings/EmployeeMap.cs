@@ -19,13 +19,6 @@ namespace Fuel.Manager.Server.Mappings
             Map(x=> x.EmployeeNo).Column("EmployeeNo").Length(10).Not.Nullable();
             Map(x => x.IsAdmin).Column("IsAdmin").Not.Nullable();
             Map(x => x.Version).Column ("Version").Not.Nullable();
-
-            HasManyToMany(x => x.Cars).Table("EmployeeToCarRelations")
-                .ParentKeyColumn("EmployeeId")
-                .ChildKeyColumn("CarId")
-                .LazyLoad()
-                .Cascade.SaveUpdate();
-
         }
         
 

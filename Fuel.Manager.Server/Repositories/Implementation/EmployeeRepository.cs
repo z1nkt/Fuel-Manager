@@ -26,5 +26,6 @@ namespace Fuel.Manager.Server.Repositories.Implementation
                 return session.Query<Employee>().FirstOrDefault(e => e.Username == username);
             }
         }
+
     }
 }
