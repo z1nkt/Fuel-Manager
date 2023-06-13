@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
         xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
         mc:Ignorable="d"
-        Title="AddCarToEmployeeWindow" Height="450" Width="800">
+        Title="Fuel Manager - Fahrzeugverknüpfen" Height="406" Width="530">
     <StackPanel>
-        <ListBox Height="100" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="500" MaxWidth="500" MinHeight="300" Margin="0,15,0,0" MaxHeight="300">
+        <ListView Height="100" ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="500" MaxWidth="500" MinHeight="300" Margin="0,15,0,0" MaxHeight="300">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Car}">
                     <WrapPanel>
@@ -18,11 +18,11 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListView>
         <Label HorizontalAlignment="Center" MinHeight="35" Foreground="#FFDA1C1C" />
         <WrapPanel HorizontalAlignment="Center">
-            <Button Content="Hinzufügen" Command="{Binding AddCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0" />
-            <Button Content="Abbrechen" Command="{Binding CancelCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0"/>
+            <Button Content="Verknüpfen" Command="{Binding AddCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0" Background="#FF324ACA" FontSize="16" FontWeight="Bold" Foreground="White" />
+            <Button Content="Abbrechen" Command="{Binding CancelCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0" Foreground="White" FontSize="16" FontWeight="Bold" Background="#FF324ACA"/>
         </WrapPanel>
     </StackPanel>
 </Window>
