@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace Fuel.Manager.Client.Views
 {
     /// <summary>
-    /// Interaktionslogik für LoginControl.xaml
+    /// Interaktionslogik für AddCarToEmployeeWindow.xaml
     /// </summary>
-    public partial class LoginControl : Window
+    public partial class AddCarToEmployeeWindow : Window
     {
-        public LoginControl()
+        public AddCarToEmployeeWindow()
         {
             InitializeComponent();
         }
-
     }
 }

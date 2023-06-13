@@ -8,6 +8,6 @@ namespace Fuel.Manager.Client.Models
 {
     public class LoginModel
     {
-
+        public string Username { get; set; }
     }
 }

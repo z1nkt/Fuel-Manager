@@ -17,7 +17,7 @@ namespace Fuel.Manager.Client.Controllers
         private EmployeeView mView;
         private EmployeeViewModel mViewModel;
 
-        //private AddCarToEmployeeController mController;
+        private AddCarToEmployeeController mAddCarToEmployeeController;
         private App mApplication;
 
         public EmployeeController(EmployeeView view, EmployeeViewModel viewModel, App app)
@@ -27,8 +27,8 @@ namespace Fuel.Manager.Client.Controllers
 
             mView.DataContext = mViewModel;
 
-            //mViewModel.AddCarCommand = new RelayCommand(ExecuteAddCarCommand);
-            //mViewModel.RemoveCarCommand = new RelayCommand(ExecuteRemoveCarCommand);
+            mViewModel.AddCarCommand = new RelayCommand(ExecuteAddCarCommand);
+            mViewModel.RemoveCarCommand = new RelayCommand(ExecuteRemoveCarCommand);
             mViewModel.EmployeeController = this;
             mApplication = app;
         }
@@ -44,7 +44,7 @@ namespace Fuel.Manager.Client.Controllers
 
             var values = JsonHelper.DictionaryToJson(data);
 
-            var response = await client.PostAsync("http://localhost:3000/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("http://localhost:4269/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
             var responseString = await response.Content.ReadAsStringAsync();
 
             List<Car> cars = Mapper.JsonToCarList(responseString);
@@ -103,7 +103,7 @@ namespace Fuel.Manager.Client.Controllers
             return cars;
         }
 
-        /*public string GetEmployeePassword()
+        public string GetEmployeePassword()
         {
             return mView.GetPassword();
         }
@@ -111,7 +111,7 @@ namespace Fuel.Manager.Client.Controllers
         public void ResetEmployeePassword()
         {
             mView.ResetPasswordBox();
-        }*/
+        }
 
         public void SetControllerData(List<Employee> employeeList)
         {
@@ -142,14 +142,14 @@ namespace Fuel.Manager.Client.Controllers
             }
         }
 
-        /* public async void ExecuteAddCarCommand(object o)
+         public async void ExecuteAddCarCommand(object o)
          {
-             mController = mApplication.Container.Resolve<AddCarToEmployeeController>();
+             mAddCarToEmployeeController = mApplication.Container.Resolve<AddCarToEmployeeController>();
 
              //add all cars to Controller
              GetAllCarsForSelection();
 
-             Car car = mController.GetSelectedCar();
+             Car car = mAddCarToEmployeeController.GetSelectedCar();
 
 
              if (car != null)//without cancel button is not working for obvious reasons :)
@@ -173,9 +173,9 @@ namespace Fuel.Manager.Client.Controllers
 
                  SetFirstCar();
              }
-         }*/
+         }
 
-        /*public async void ExecuteRemoveCarCommand(object o)
+        public async void ExecuteRemoveCarCommand(object o)
         {
             if (!(mViewModel.SelectedCar == null))
             {
@@ -193,9 +193,9 @@ namespace Fuel.Manager.Client.Controllers
 
                 mViewModel.Cars.Remove(mViewModel.SelectedCar);
             }
-        }*/
+        }
 
-        /*public async void GetAllCarsForSelection()
+        public async void GetAllCarsForSelection()
         {
             HttpClient client = new HttpClient();
 
@@ -224,8 +224,8 @@ namespace Fuel.Manager.Client.Controllers
                 allCars.Remove(remove);
             }
 
-            mController.SetControllerData(allCars);
-        }*/
+            mAddCarToEmployeeController.SetControllerData(allCars);
+        }
     }
 }
 

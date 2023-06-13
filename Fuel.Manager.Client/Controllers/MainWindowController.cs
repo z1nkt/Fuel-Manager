@@ -98,7 +98,7 @@ namespace Fuel.Manager.Client.Controllers
                     client = new HttpClient();
                     values = Mapper.RefuelToJson(newRefuel);
 
-                    response = await client.PostAsync("http://localhost:3000/api/refuel/new", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/refuel/new", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -130,7 +130,7 @@ namespace Fuel.Manager.Client.Controllers
                     client = new HttpClient();
                     values = Mapper.CarToJson(newCar);
 
-                    response = await client.PostAsync("http://localhost:3000/api/car/new", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/car/new", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -214,7 +214,7 @@ namespace Fuel.Manager.Client.Controllers
                     EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
-                    response = await client.PostAsync("http://localhost:3000/api/employee/new", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/employee/new", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -267,7 +267,7 @@ namespace Fuel.Manager.Client.Controllers
                     client = new HttpClient();
 
                     values = Mapper.RefuelToJson(refuel);
-                    response = await client.PostAsync("http://localhost:3000/api/refuel/edited", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/refuel/edit", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -300,7 +300,7 @@ namespace Fuel.Manager.Client.Controllers
                     client = new HttpClient();
 
                     values = Mapper.CarToJson(editedCar);
-                    response = await client.PostAsync("http://localhost:3000/api/car/edited", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/car/edit", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -353,7 +353,7 @@ namespace Fuel.Manager.Client.Controllers
                     EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
-                    response = await client.PostAsync("http://localhost:3000/api/employee/edited", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/employee/edit", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -382,7 +382,7 @@ namespace Fuel.Manager.Client.Controllers
                     client = new HttpClient();
 
                     values = Mapper.RefuelToJson(deleted);
-                    response = await client.PostAsync("http://localhost:3000/api/refuel/delete", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/refuel/delete", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -416,7 +416,7 @@ namespace Fuel.Manager.Client.Controllers
                     client = new HttpClient();
 
                     values = Mapper.CarToJson(deletedCar);
-                    response = await client.PostAsync("http://localhost:3000/api/car/delete", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/car/delete", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -453,7 +453,7 @@ namespace Fuel.Manager.Client.Controllers
                     EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
-                    response = await client.PostAsync("http://localhost:3000/api/employee/delete", new StringContent(values, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync("http://localhost:4269/api/employee/delete", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
@@ -477,7 +477,7 @@ namespace Fuel.Manager.Client.Controllers
 
             var values = JsonHelper.DictionaryToJson(data);
 
-            var response = await client.PostAsync("http://localhost:3000/api/employee/refuels", new StringContent(values, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("http://localhost:4269/api/employee/refuels", new StringContent(values, Encoding.UTF8, "application/json"));
             var responseString = await response.Content.ReadAsStringAsync();
 
             refuelsLoggedInUser = Mapper.JsonToRefuelList(responseString);
@@ -493,7 +493,7 @@ namespace Fuel.Manager.Client.Controllers
 
             values = JsonHelper.DictionaryToJson(data);
 
-            response = await client.PostAsync("http://localhost:3000/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
+            response = await client.PostAsync("http://localhost:4269/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
             responseString = await response.Content.ReadAsStringAsync();
 
             carsLoggedInUser = Mapper.JsonToCarList(responseString);
@@ -506,7 +506,7 @@ namespace Fuel.Manager.Client.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = await client.GetAsync("http://localhost:3000/api/cars");
+            var response = await client.GetAsync("http://localhost:4269/api/cars");
             var responseString = await response.Content.ReadAsStringAsync();
 
             allCars = Mapper.JsonToCarList(responseString);
@@ -517,7 +517,7 @@ namespace Fuel.Manager.Client.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = await client.GetAsync("http://localhost:3000/api/employees");
+            var response = await client.GetAsync("http://localhost:4269/api/employees");
             var responseString = await response.Content.ReadAsStringAsync();
 
             allEmployees = Mapper.JsonToEmployeeList(responseString);
@@ -528,7 +528,7 @@ namespace Fuel.Manager.Client.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = await client.GetAsync("http://localhost:3000/api/refuels");
+            var response = await client.GetAsync("http://localhost:4269/api/refuels");
             var responseString = await response.Content.ReadAsStringAsync();
 
             allRefuels = Mapper.JsonToRefuelList(responseString);

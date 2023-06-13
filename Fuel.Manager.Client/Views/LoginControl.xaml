@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
+        xmlns:helper="clr-namespace:Fuel.Manager.Client.Helper" xmlns:viewmodels="clr-namespace:Fuel.Manager.Client.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d" Height="450" Width="800" Background="#eee">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="30">
@@ -12,14 +14,12 @@
                 <StackPanel Margin="0 10">
                     <Label>Username</Label>
                     <TextBox TabIndex="0"
-                             HorizontalContentAlignment="Center"
+                             HorizontalContentAlignment="Left"
                              Text="{Binding Username}"/>
                 </StackPanel>
                 <StackPanel>
                     <Label>Password</Label>
-                    <TextBox TabIndex="1"
-                             HorizontalContentAlignment="Center"
-                             Text="{Binding Password}"/>
+                    <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" />
                 </StackPanel>
                 <Button Margin="0 20 0 0" Command="{Binding LoginCommand}" TabIndex="2">Login</Button>
             </StackPanel>

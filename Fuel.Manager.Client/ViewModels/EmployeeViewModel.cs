@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,6 +14,7 @@ namespace Fuel.Manager.Client.ViewModels
 {
     public class EmployeeViewModel : ViewModelBase
     {
+        public SecureString SecurePassword { private get; set; }
         public EmployeeViewModel()
         {
             Employees = new ObservableCollection<Employee>();
@@ -44,6 +46,7 @@ namespace Fuel.Manager.Client.ViewModels
                     Firstname = _SelectedEmployee.Firstname;
                     Lastname = _SelectedEmployee.Lastname;
                     IsAdmin = _SelectedEmployee.IsAdmin;
+                    Password = _SelectedEmployee.Password;
 
                     //updates the list of cars
                     EmployeeController.GetCarsFromEmployeeID(_SelectedEmployee.Id);
@@ -141,6 +144,22 @@ namespace Fuel.Manager.Client.ViewModels
                 }
                 _IsAdmin = value;
                 OnPropertyChanged("IsAdmin");
+            }
+        }
+
+        private string _Password;
+
+        public string Password
+        {
+            get { return _Password; }
+            set
+            {
+                if (value == _Password)
+                {
+                    return;
+                }
+                _Password = value;
+                OnPropertyChanged("Password");
             }
         }
     }

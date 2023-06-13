@@ -21,12 +21,12 @@ namespace Fuel.Manager.Client.Controllers
 
         public LoginController(LoginControl loginControl, LoginViewModel loginViewModel)
         {
-            mView = new LoginControl();
-            mViewModel = new LoginViewModel();
+            mView = loginControl;
+            mViewModel = loginViewModel;
 
             mView.DataContext = mViewModel;
             mViewModel.LoginCommand = new RelayCommand(ExecuteLoginCommand);
-            mView.ShowDialog();
+          
 
         }
 
@@ -37,12 +37,12 @@ namespace Fuel.Manager.Client.Controllers
 
             var data = new Dictionary<string, string>
             {
-                { "username", mViewModel.Username.ToLower() },
-                { "password", mViewModel.Password.ToLower() },
+                { "username", mViewModel.Username.ToLower()},
+                { "password", mViewModel.Password},
             };
 
             var values = JsonHelper.DictionaryToJson(data);
-            var response = await client.PostAsync("http://localhost:3000/api/login", new StringContent(values, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("http://localhost:4269/api/login", new StringContent(values, Encoding.UTF8, "application/json"));
             string code = response.StatusCode.ToString();
             var responseString = await response.Content.ReadAsStringAsync();
 
@@ -62,10 +62,6 @@ namespace Fuel.Manager.Client.Controllers
         public Employee Login()
         {
             mView.ShowDialog();
-            while (mView.DialogResult == false)
-            {
-
-            }
 
             return employee;
         }

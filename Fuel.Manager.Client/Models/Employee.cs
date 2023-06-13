@@ -15,5 +15,6 @@ namespace Fuel.Manager.Client.Models
         public string EmployeeNo { get; set; }
         public bool IsAdmin { get; set; }
         public int Version { get; set; }
+        public string Password { get; set; }
     }
 }

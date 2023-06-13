@@ -24,5 +24,23 @@ namespace Fuel.Manager.Client.Views
         {
             InitializeComponent();
         }
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
+        }
+
+        public string GetPassword()
+        {
+            PasswordBox p = this.FindName("keinMVVMC") as PasswordBox;
+            return p.Password;
+        }
+
+        public void ResetPasswordBox()
+        {
+            PasswordBox p = this.FindName("keinMVVMC") as PasswordBox;
+            p.Password = string.Empty;
+        }
+
     }
 }

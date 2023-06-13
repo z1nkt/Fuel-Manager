@@ -18,7 +18,7 @@ namespace Fuel.Manager.Client.Views
     /// <summary>
     /// Interaktionslogik für RefuelView.xaml
     /// </summary>
-    public partial class RefuelView : UserControl
+    public partial class RefuelView : Page
     {
         public RefuelView()
         {

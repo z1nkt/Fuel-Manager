@@ -12,14 +12,10 @@ using Fuel.Manager.Client.Views;
 
 namespace Fuel.Manager.Client.Controllers
 {
-    public class CarController : SubmoduleController
+    public class CarController 
     {
         private CarView mView;
         private CarViewModel mViewModel;
-        public override ViewModelBase Initialize()
-        {
-            return new CarViewModel();
-        }
 
         public CarController()
         {
