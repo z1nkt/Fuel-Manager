@@ -10,6 +10,6 @@ namespace Fuel.Manager.Server.Services.Interfaces
         void Update(Employee employee);
         void Delete(Employee employee);
         Employee Login(string username, string password);
-        void ChangePassword(string username, string oldP, string newP);
+        void ChangePassword(string username, string oldPassword, string newPassword);
     }
 }
