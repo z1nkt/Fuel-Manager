@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
+        <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Margin="0,0,0,5" MaxHeight="130" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="130">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Employee}">
@@ -28,7 +29,7 @@
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Benutzername" MinWidth="100"/>
-                    <TextBox Text="{Binding Username}" MinWidth="100"/>
+                    <TextBox Text="{Binding Username }" MinWidth="100"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Passwort" MinWidth="100"/>

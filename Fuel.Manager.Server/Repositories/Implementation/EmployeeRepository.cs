@@ -13,12 +13,6 @@ namespace Fuel.Manager.Server.Repositories.Implementation
             _nhibernateHelper = nhibernateHelper;
         }
 
-        public Employee FindByEmployeeNumber(string employeeNumber)
-        {
-            using var sesssion = _nhibernateHelper.OpenSession();
-            return sesssion.Query<Employee>().FirstOrDefault(e => e.EmployeeNo == employeeNumber);
-        }
-
         public Employee GetByUsername(string username)
         {
             using (var session = _nhibernateHelper.OpenSession())

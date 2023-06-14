@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
+        <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListBox ItemsSource="{Binding Refuels}" SelectedItem="{Binding SelectedRefuel}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Refuel}">
@@ -22,7 +23,7 @@
         <StackPanel IsEnabled="{Binding IsEnabled}" >
         <WrapPanel Margin="0,0,0,5">
             <Label Content="Fahrzeug" MinWidth="100"/>
-            <ComboBox MinWidth="100" ItemsSource="{Binding Path=Cars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                <ComboBox MinWidth="100" ItemsSource="{Binding Path=EmployeeCars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type models:Car}">
                         <TextBlock Text="{Binding LicensePlate}"/>

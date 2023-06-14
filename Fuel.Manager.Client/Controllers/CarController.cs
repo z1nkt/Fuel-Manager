@@ -17,10 +17,6 @@ namespace Fuel.Manager.Client.Controllers
         private CarView mView;
         private CarViewModel mViewModel;
 
-        public CarController()
-        {
-
-        }
         public CarController(CarView view, CarViewModel viewModel)
         {
             mView = view;
@@ -65,21 +61,54 @@ namespace Fuel.Manager.Client.Controllers
             {
                 o.Add(car);
             }
-
-            SetFirstCar();
         }
 
-        public void SetFirstCar()
+        public void SetIsEnabled()
         {
-            if (mViewModel.Cars.Count > 0)
+            mViewModel.IsEnabled = !mViewModel.IsEnabled;
+        }
+
+        public bool ValidateInput()
+        {
+            mViewModel.ErrorMessage = "";
+            if (string.IsNullOrEmpty(mViewModel.LicensePlate))
             {
-                mViewModel.SelectedCar = mViewModel.Cars.First();
+                mViewModel.ErrorMessage = "Es muss ein Kennzeichen angegeben werden!";
+                return true;
             }
-        }
 
-        public void SetIsEnabled(bool enable)
-        {
-            mViewModel.IsEnabled = enable;
+
+            if (string.IsNullOrEmpty(mViewModel.Vendor))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Hersteller angegeben werden!";
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(mViewModel.Model))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Modell angegeben werden!";
+                return true;
+            }
+
+            if (mViewModel.LicensePlate.Length > 50 )
+            {
+                mViewModel.ErrorMessage = "Kennzeichen darf nicht länger als 50 Zeichen sein";
+                return true;
+            }
+
+            if (mViewModel.Vendor.Length > 20)
+            {
+                mViewModel.ErrorMessage = "Hersteller darf nicht länger als 20 Zeichen sein";
+                return true;
+            }
+
+            if (mViewModel.Model.Length > 20)
+            {
+                mViewModel.ErrorMessage = "Modell darf nicht länger als 10 Zeichen sein";
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -26,13 +26,10 @@ namespace Fuel.Manager.Client.Controllers
 
             mView.DataContext = mViewModel;
             mViewModel.LoginCommand = new RelayCommand(ExecuteLoginCommand);
-          
-
         }
 
         public async void ExecuteLoginCommand(object obj)
         {
-            Console.WriteLine("Hallo");
             HttpClient client = new HttpClient();
 
             var data = new Dictionary<string, string>

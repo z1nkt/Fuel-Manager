@@ -7,6 +7,7 @@
         xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
         mc:Ignorable="d">
     <StackPanel>
+        <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Car}">

@@ -31,7 +31,7 @@ namespace Fuel.Manager.Client.ViewModels
                     Model = _SelectedCar.Model;
                 }
 
-                OnPropertyChanged("SelectedCar");
+                OnPropertyChanged(nameof(SelectedCar));
             }
         }
 
@@ -46,7 +46,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _LicensePlate = value;
-                OnPropertyChanged("LicensePlate");
+                OnPropertyChanged(nameof(LicensePlate));
             }
         }
 
@@ -61,7 +61,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _Vendor = value;
-                OnPropertyChanged("Vendor");
+                OnPropertyChanged(nameof(Vendor));
             }
         }
 
@@ -76,7 +76,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _Model = value;
-                OnPropertyChanged("Model");
+                OnPropertyChanged(nameof(Model));
             }
         }
 
@@ -94,6 +94,19 @@ namespace Fuel.Manager.Client.ViewModels
 
                 _IsEnabled = value;
                 OnPropertyChanged(nameof(IsEnabled));
+            }
+        }
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                if (_errorMessage == value) return;
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
             }
         }
 

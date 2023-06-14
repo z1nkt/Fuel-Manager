@@ -14,6 +14,7 @@ namespace Fuel.Manager.Client.ViewModels
     {
         public ICommand TodayCommand { get; set; }
         public ObservableCollection<Car> Cars { get; set; }
+        public ObservableCollection<Car> EmployeeCars { get; set; }
         private Car _SelectedCar;
         public Car SelectedCar
         {
@@ -142,11 +143,26 @@ namespace Fuel.Manager.Client.ViewModels
             }
         }
 
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                if (_errorMessage == value) return;
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
 
         public RefuelViewModel()
         {
             Cars = new ObservableCollection<Car>();
             Refuels = new ObservableCollection<Refuel>();
+            EmployeeCars = new ObservableCollection<Car>();
+            ErrorMessage = "";
         }
     }
 }

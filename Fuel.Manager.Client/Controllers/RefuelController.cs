@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Fuel.Manager.Client.Models;
 using Fuel.Manager.Client.Views;
+using Fuel.Manager.Client.Helper;
+using System.Net.Http;
 
 namespace Fuel.Manager.Client.Controllers
 {
@@ -62,7 +64,7 @@ namespace Fuel.Manager.Client.Controllers
             return edited;
         }
 
-        public void SetControllerData(List<Refuel> refuelList, List<Car> carList)
+        public void SetControllerData(List<Refuel> refuelList, List<Car> carList, List<Car> employeeCarList)
         {
             ObservableCollection<Car> o = mViewModel.Cars;
             o.Clear();
@@ -80,20 +82,49 @@ namespace Fuel.Manager.Client.Controllers
                 r.Add(refuel);
             }
 
-            SetFirstRefuel();
-        }
-
-        public void SetFirstRefuel()
-        {
-            if (mViewModel.Refuels.Count > 0)
+            ObservableCollection<Car> ec = mViewModel.EmployeeCars;
+            ec.Clear();
+            foreach (Car car in employeeCarList)
             {
-                mViewModel.SelectedRefuel = mViewModel.Refuels.First();
+                ec.Add(car);
             }
+                
+
         }
 
-        public void SetIsEnabled(bool enable)
+        public void SetIsEnabled()
         {
-            mViewModel.IsEnabled = enable;
+            mViewModel.IsEnabled = !mViewModel.IsEnabled;
+        }
+
+        public bool ValidateInput()
+        {
+            mViewModel.ErrorMessage = "";
+            if (string.IsNullOrEmpty(mViewModel.SelectedCar.ToString()))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Fahrzeug ausgewählt sein";
+                return true;
+            }
+
+            if (decimal.IsNegative(mViewModel.Price))
+            {
+                mViewModel.ErrorMessage = "Preis darf nicht negativ sein!";
+                return true;
+            }
+
+            if (decimal.IsNegative(mViewModel.Amount))
+            {
+                mViewModel.ErrorMessage = "Liter können nicht negativ sein!";
+                return true;
+            }
+
+            if (int.IsNegative(mViewModel.Mileage))
+            {
+                mViewModel.ErrorMessage = "Kilometerstand kann nicht negativ sein!";
+                return true;
+            }
+
+            return false;
         }
     }
 }

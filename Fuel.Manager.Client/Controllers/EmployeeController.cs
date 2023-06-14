@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using Fuel.Manager.Client.ViewModels;
 using Fuel.Manager.Client.Views;
@@ -19,7 +20,6 @@ namespace Fuel.Manager.Client.Controllers
 
         private LinkCarToEmployeeController _mLinkCarToEmployeeController;
         private App mApplication;
-        public string host = "http://localhost:4269/api/";
 
         public EmployeeController(EmployeeView view, EmployeeViewModel viewModel, App app)
         {
@@ -64,8 +64,6 @@ namespace Fuel.Manager.Client.Controllers
 
         public Employee GetNewEmployee()
         {
-            //Password needs to be handled with other method
-            //List of Cars needs to be handled with other method
             Employee e = new Employee();
             e.EmployeeNo = mViewModel.EmployeeNo;
             e.Username = mViewModel.Username;
@@ -77,8 +75,6 @@ namespace Fuel.Manager.Client.Controllers
 
         public Employee GetEditedEmployee()
         {
-            //Password needs to be handled with other method
-            //List of Cars needs to be handled with other method
             Employee e = GetEmployee();
             Employee edited = new Employee();
             edited.Id = e.Id;
@@ -124,33 +120,11 @@ namespace Fuel.Manager.Client.Controllers
                 e.Add(employee);
             }
 
-            SetFirstEmployee();
         }
 
-        public void SetFirstEmployee()
+        public void SetIsEnabled()
         {
-            if (mViewModel.Employees.Count > 0)
-            {
-                mViewModel.SelectedEmployee = mViewModel.Employees.First();
-            }
-        }
-
-        public void SetFirstCar()
-        {
-            if (mViewModel.Cars.Count > 0)
-            {
-                mViewModel.SelectedCar = mViewModel.Cars.First();
-            }
-        }
-
-        public bool GetIsEnabled()
-        {
-            return mViewModel.IsEnabled;
-        }
-
-        public void SetIsEnabled(bool enable)
-        {
-            mViewModel.IsEnabled = enable;
+            mViewModel.IsEnabled = !mViewModel.IsEnabled;
         }
 
          public async void ExecuteAddCarCommand(object o)
@@ -181,8 +155,6 @@ namespace Fuel.Manager.Client.Controllers
                  {
                      mViewModel.Cars.Add(car);
                  }
-
-                 SetFirstCar();
              }
          }
 
@@ -238,7 +210,53 @@ namespace Fuel.Manager.Client.Controllers
             _mLinkCarToEmployeeController.SetControllerData(allCars);
         }
 
-        
+
+        public bool ValidateInput()
+        {
+            mViewModel.ErrorMessage = "";
+            if (string.IsNullOrEmpty(mViewModel.Username))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Benutzername angegeben werden!";
+                return true;
+            }
+
+
+            if (string.IsNullOrEmpty(mViewModel.Lastname))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Nachname angegeben werden!";
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(mViewModel.Password))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Password angegeben werden!";
+                return true;
+            }
+
+            
+
+            if (mViewModel.Username.Length > 50 || mViewModel.Firstname.Length > 50 || mViewModel.Lastname.Length > 50)
+            {
+                mViewModel.ErrorMessage = "Angabe darf nicht länger als 50 Zeichen sein";
+                return true;
+            }
+
+            if (mViewModel.Password.Length > 60)
+            {
+                mViewModel.ErrorMessage = "Passwort darf nicht länger als 60 Zeichen sein";
+                return true;
+            }
+
+            if (mViewModel.Username.Length > 10)
+            {
+                mViewModel.ErrorMessage = "Benutzername darf nicht länger als 10 Zeichen sein";
+                return true;
+            }
+
+            return false;
+        }
+
+
     }
 }
 

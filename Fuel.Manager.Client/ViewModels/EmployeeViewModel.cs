@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
+using System.Xml.Linq;
 using Fuel.Manager.Client.Controllers;
 using Fuel.Manager.Client.Framework;
 using Fuel.Manager.Client.Models;
@@ -14,7 +18,6 @@ namespace Fuel.Manager.Client.ViewModels
 {
     public class EmployeeViewModel : ViewModelBase
     {
-        public SecureString SecurePassword { private get; set; }
         public EmployeeViewModel()
         {
             Employees = new ObservableCollection<Employee>();
@@ -52,7 +55,7 @@ namespace Fuel.Manager.Client.ViewModels
                     EmployeeController.GetCarsFromEmployeeID(_SelectedEmployee.Id);
                 }
 
-                OnPropertyChanged("SelectedEmployee");
+                OnPropertyChanged(nameof(SelectedEmployee));
             }
         }
 
@@ -68,7 +71,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _SelectedCar = value;
-                OnPropertyChanged("SelectedCar");
+                OnPropertyChanged(nameof(SelectedCar));
             }
         }
 
@@ -83,7 +86,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _EmployeeNo = value;
-                OnPropertyChanged("EmployeeNo");
+                OnPropertyChanged(nameof(EmployeeNo));
             }
         }
 
@@ -98,7 +101,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _Username = value;
-                OnPropertyChanged("Username");
+                OnPropertyChanged(nameof(Username));
             }
         }
 
@@ -113,7 +116,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _Firstname = value;
-                OnPropertyChanged("Firstname");
+                OnPropertyChanged(nameof(Firstname));
             }
         }
 
@@ -128,7 +131,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _Lastname = value;
-                OnPropertyChanged("Lastname");
+                OnPropertyChanged(nameof(Lastname));
             }
         }
 
@@ -143,7 +146,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _IsAdmin = value;
-                OnPropertyChanged("IsAdmin");
+                OnPropertyChanged(nameof(IsAdmin));
             }
         }
 
@@ -178,5 +181,19 @@ namespace Fuel.Manager.Client.ViewModels
                 OnPropertyChanged(nameof(IsEnabled));
             }
         }
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                if (_errorMessage == value) return;
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
     }
 }
