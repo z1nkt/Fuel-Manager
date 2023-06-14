@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Fuel.Manager.Server\Fuel.Manager.Server.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
