@@ -17,7 +17,7 @@ namespace Fuel.Manager.Client.Controllers
         private EmployeeView mView;
         private EmployeeViewModel mViewModel;
 
-        private AddCarToEmployeeController mAddCarToEmployeeController;
+        private LinkCarToEmployeeController _mLinkCarToEmployeeController;
         private App mApplication;
         public string host = "http://localhost:4269/api/";
 
@@ -45,7 +45,7 @@ namespace Fuel.Manager.Client.Controllers
 
             var values = JsonHelper.DictionaryToJson(data);
 
-            var response = await client.PostAsync("http://localhost:4269/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("http://localhost:5115/api/employee/cars", new StringContent(values, Encoding.UTF8, "application/json"));
             var responseString = await response.Content.ReadAsStringAsync();
 
             List<Car> cars = Mapper.JsonToCarList(responseString);
@@ -155,12 +155,12 @@ namespace Fuel.Manager.Client.Controllers
 
          public async void ExecuteAddCarCommand(object o)
          {
-             mAddCarToEmployeeController = mApplication.Container.Resolve<AddCarToEmployeeController>();
+             _mLinkCarToEmployeeController = mApplication.Container.Resolve<LinkCarToEmployeeController>();
 
              //add all cars to Controller
              GetAllCarsForSelection();
 
-             Car car = mAddCarToEmployeeController.GetSelectedCar();
+             Car car = _mLinkCarToEmployeeController.GetSelectedCar();
 
 
              if (car != null)//without cancel button is not working for obvious reasons :)
@@ -175,7 +175,7 @@ namespace Fuel.Manager.Client.Controllers
 
                  var values = JsonHelper.DictionaryToJson(data);
 
-                 await client.PostAsync("http://localhost:4269/api/employee/car/add", new StringContent(values, Encoding.UTF8, "application/json"));
+                 await client.PostAsync("http://localhost:5115/api/employee/car/add", new StringContent(values, Encoding.UTF8, "application/json"));
 
                  if (!(car == null))
                  {
@@ -200,7 +200,7 @@ namespace Fuel.Manager.Client.Controllers
 
                 var values = JsonHelper.DictionaryToJson(data);
 
-                await client.PostAsync("http://localhost:4269/api/employee/car/delete", new StringContent(values, Encoding.UTF8, "application/json"));
+                await client.PostAsync("http://localhost:5115/api/employee/car/delete", new StringContent(values, Encoding.UTF8, "application/json"));
 
                 mViewModel.Cars.Remove(mViewModel.SelectedCar);
             }
@@ -210,7 +210,7 @@ namespace Fuel.Manager.Client.Controllers
         {
             HttpClient client = new HttpClient();
 
-            var response = await client.GetAsync("http://localhost:4269/api/cars");
+            var response = await client.GetAsync("http://localhost:5115/api/cars");
             var responseString = await response.Content.ReadAsStringAsync();
 
             List<Car> allCars = Mapper.JsonToCarList(responseString);
@@ -235,7 +235,7 @@ namespace Fuel.Manager.Client.Controllers
                 allCars.Remove(remove);
             }
 
-            mAddCarToEmployeeController.SetControllerData(allCars);
+            _mLinkCarToEmployeeController.SetControllerData(allCars);
         }
 
         

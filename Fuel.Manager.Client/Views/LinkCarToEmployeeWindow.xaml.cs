@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Fuel.Manager.Client.Views
 {
     /// <summary>
-    /// Interaktionslogik für AddCarToEmployeeWindow.xaml
+    /// Interaktionslogik für LinkCarToEmployeeWindow.xaml
     /// </summary>
-    public partial class AddCarToEmployeeWindow : Window
+    public partial class LinkCarToEmployeeWindow : Window
     {
-        public AddCarToEmployeeWindow()
+        public LinkCarToEmployeeWindow()
         {
             InitializeComponent();
         }

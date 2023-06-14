@@ -42,7 +42,7 @@ namespace Fuel.Manager.Client.Controllers
             };
 
             var values = JsonHelper.DictionaryToJson(data);
-            var response = await client.PostAsync("http://localhost:4269/api/login", new StringContent(values, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("http://localhost:5115/api/login", new StringContent(values, Encoding.UTF8, "application/json"));
             string code = response.StatusCode.ToString();
             var responseString = await response.Content.ReadAsStringAsync();
 

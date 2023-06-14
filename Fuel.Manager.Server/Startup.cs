@@ -24,7 +24,7 @@ namespace Fuel.Manager.Server
             var container = builder.Build();
             using (var scope = container.BeginLifetimeScope())
             {
-                RepositoryMapperController controller = new RepositoryMapperController(scope.Resolve<ICarService>(), scope.Resolve<IEmployeeService>(), scope.Resolve<IRefuelService>(), scope.Resolve<IEmployeeToCarRelationService>());
+                APIController controller = new APIController(scope.Resolve<ICarService>(), scope.Resolve<IEmployeeService>(), scope.Resolve<IRefuelService>(), scope.Resolve<IEmployeeToCarRelationService>());
 
                 controller.StartUp();
             }

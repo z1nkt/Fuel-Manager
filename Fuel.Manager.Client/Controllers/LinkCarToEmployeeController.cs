@@ -10,15 +10,15 @@ using Fuel.Manager.Client.Views;
 
 namespace Fuel.Manager.Client.Controllers
 {
-    public class AddCarToEmployeeController
+    public class LinkCarToEmployeeController
     {
-        private AddCarToEmployeeWindow mView;
-        private AddCarToEmployeeViewModel mViewModel;
+        private LinkCarToEmployeeWindow mView;
+        private LinkCarToEmployeeViewModel mViewModel;
 
-        public AddCarToEmployeeController(AddCarToEmployeeWindow addView, AddCarToEmployeeViewModel addViewModel)
+        public LinkCarToEmployeeController(LinkCarToEmployeeWindow linkView, LinkCarToEmployeeViewModel linkViewModel)
         {
-            mView = addView;
-            mViewModel = addViewModel;
+            mView = linkView;
+            mViewModel = linkViewModel;
 
             mView.DataContext = mViewModel;
 

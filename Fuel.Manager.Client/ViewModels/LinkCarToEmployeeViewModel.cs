@@ -10,7 +10,7 @@ using Fuel.Manager.Client.Models;
 
 namespace Fuel.Manager.Client.ViewModels
 {
-    public class AddCarToEmployeeViewModel : ViewModelBase
+    public class LinkCarToEmployeeViewModel : ViewModelBase
     {
         public ICommand AddCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -33,7 +33,7 @@ namespace Fuel.Manager.Client.ViewModels
             }
         }
 
-        public AddCarToEmployeeViewModel()
+        public LinkCarToEmployeeViewModel()
         {
             Cars = new ObservableCollection<Car>();
         }

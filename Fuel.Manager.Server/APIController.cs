@@ -5,13 +5,13 @@ using Fuel.Manager.Server.Services.Interfaces;
 
 namespace Fuel.Manager.Server
 {
-    public class RepositoryMapperController
+    public class APIController
     {
         private ICarService _carService;
         private IEmployeeService _employeeService;
         private IRefuelService _refuelService;
         private IEmployeeToCarRelationService _employeeToCarRelationService;
-        public RepositoryMapperController(ICarService carService, IEmployeeService employeeService, IRefuelService refuelService, IEmployeeToCarRelationService employeeToCarRelationService)
+        public APIController(ICarService carService, IEmployeeService employeeService, IRefuelService refuelService, IEmployeeToCarRelationService employeeToCarRelationService)
         {
             _carService = carService;
             _employeeService = employeeService;
@@ -61,26 +61,33 @@ namespace Fuel.Manager.Server
 
             app.MapPost("/api/employee/car/delete", ([FromBody] AddEmployeeCarRelation ecr) => DeleteEmployeeCarRelation(ecr));
 
-            app.Run("http://localhost:4269");
+            app.Run("http://localhost:5115");
         }
 
-        private IResult Login(Login login)
+        public IResult Login(Login login)
         {
+
+            if (login == null)
+            {
+                return Results.NotFound(null);
+            }
+
             Employee e = _employeeService.Login(login.Username, login.Password);
+
 
             if (e != null)
             {
-                GetEmployee outgoingEmployee = new GetEmployee();
+                GetEmployee getEmployee = new GetEmployee();
 
-                outgoingEmployee.Id = e.Id;
-                outgoingEmployee.Username = e.Username;
-                outgoingEmployee.Firstname = e.Firstname;
-                outgoingEmployee.Lastname = e.Lastname;
-                outgoingEmployee.EmployeeNo = e.EmployeeNo;
-                outgoingEmployee.IsAdmin = e.IsAdmin;
-                outgoingEmployee.Version = e.Version;
+                getEmployee.Id = e.Id;
+                getEmployee.Username = e.Username;
+                getEmployee.Firstname = e.Firstname;
+                getEmployee.Lastname = e.Lastname;
+                getEmployee.EmployeeNo = e.EmployeeNo;
+                getEmployee.IsAdmin = e.IsAdmin;
+                getEmployee.Version = e.Version;
 
-                return Results.Ok(outgoingEmployee);
+                return Results.Ok(getEmployee);
             }
             else
             {
