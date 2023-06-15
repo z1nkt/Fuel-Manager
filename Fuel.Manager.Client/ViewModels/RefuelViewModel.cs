@@ -32,7 +32,7 @@ namespace Fuel.Manager.Client.ViewModels
 
                 _SelectedCar = value;
 
-                OnPropertyChanged("SelectedCar");
+                OnPropertyChanged(nameof(SelectedCar));
             }
         }
 
@@ -62,7 +62,7 @@ namespace Fuel.Manager.Client.ViewModels
                     Price = _SelectedRefuel.Price;
                 }
 
-                OnPropertyChanged("SelectedRefuel");
+                OnPropertyChanged(nameof(SelectedRefuel));
             }
         }
 
@@ -77,7 +77,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _refuelDate = value;
-                OnPropertyChanged("RefuelDate");
+                OnPropertyChanged(nameof(RefuelDate));
             }
         }
 
@@ -92,7 +92,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _mileage = value;
-                OnPropertyChanged("Mileage");
+                OnPropertyChanged(nameof(Mileage));
             }
         }
 
@@ -107,7 +107,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _amount = value;
-                OnPropertyChanged("Amount");
+                OnPropertyChanged(nameof(Amount));
             }
         }
 
@@ -122,7 +122,7 @@ namespace Fuel.Manager.Client.ViewModels
                     return;
                 }
                 _price = value;
-                OnPropertyChanged("Price");
+                OnPropertyChanged(nameof(Price));
             }
         }
 

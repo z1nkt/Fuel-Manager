@@ -40,6 +40,7 @@ namespace Fuel.Manager.Client.Controllers
 
         public Refuel GetNewRefuel()
         {
+
             Refuel refuel = new Refuel();
             refuel.Car = mViewModel.SelectedCar;
             refuel.Date = mViewModel.RefuelDate;
@@ -47,7 +48,12 @@ namespace Fuel.Manager.Client.Controllers
             refuel.Amount = mViewModel.Amount;
             refuel.Price = mViewModel.Price;
 
-            return refuel;
+            if(ValidateRefuelObject(refuel)) return null;
+            else return refuel;
+
+
+
+
         }
 
         public Refuel GetEditedRefuel()
@@ -97,14 +103,27 @@ namespace Fuel.Manager.Client.Controllers
             mViewModel.IsEnabled = !mViewModel.IsEnabled;
         }
 
-        public bool ValidateInput()
+        public bool ValidateRefuelObject(Refuel refuel)
         {
             mViewModel.ErrorMessage = "";
-            if (string.IsNullOrEmpty(mViewModel.SelectedCar.ToString()))
+
+            if (refuel.Car == null )
             {
                 mViewModel.ErrorMessage = "Es muss ein Fahrzeug ausgewählt sein";
                 return true;
+
             }
+            return false;
+        }
+
+        public bool ValidateInput()
+        {
+            mViewModel.ErrorMessage = "";
+            /*if (string.IsNullOrEmpty(mViewModel.SelectedCar.LicensePlate))
+            {
+                mViewModel.ErrorMessage = "Es muss ein Fahrzeug ausgewählt sein";
+                return true;
+            }*/
 
             if (decimal.IsNegative(mViewModel.Price))
             {

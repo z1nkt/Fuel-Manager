@@ -17,7 +17,7 @@ namespace Fuel.Manager.Server.Mappings
             Map(x => x.Price).Column("Price").Precision(16).Scale(2).Not.Nullable();
             Map(x => x.Version).Column("Version").Not.Nullable();
 
-            References(x => x.Car).Column("CarId").Not.Nullable().Cascade.All();
+            References(x => x.Car).Column("CarId").Not.Nullable();
         }
         
     }

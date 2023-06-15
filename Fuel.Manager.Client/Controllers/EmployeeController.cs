@@ -233,26 +233,6 @@ namespace Fuel.Manager.Client.Controllers
                 return true;
             }
 
-            
-
-            if (mViewModel.Username.Length > 50 || mViewModel.Firstname.Length > 50 || mViewModel.Lastname.Length > 50)
-            {
-                mViewModel.ErrorMessage = "Angabe darf nicht länger als 50 Zeichen sein";
-                return true;
-            }
-
-            if (mViewModel.Password.Length > 60)
-            {
-                mViewModel.ErrorMessage = "Passwort darf nicht länger als 60 Zeichen sein";
-                return true;
-            }
-
-            if (mViewModel.Username.Length > 10)
-            {
-                mViewModel.ErrorMessage = "Benutzername darf nicht länger als 10 Zeichen sein";
-                return true;
-            }
-
             return false;
         }
 

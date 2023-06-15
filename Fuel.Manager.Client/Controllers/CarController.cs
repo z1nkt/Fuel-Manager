@@ -90,24 +90,6 @@ namespace Fuel.Manager.Client.Controllers
                 return true;
             }
 
-            if (mViewModel.LicensePlate.Length > 50 )
-            {
-                mViewModel.ErrorMessage = "Kennzeichen darf nicht länger als 50 Zeichen sein";
-                return true;
-            }
-
-            if (mViewModel.Vendor.Length > 20)
-            {
-                mViewModel.ErrorMessage = "Hersteller darf nicht länger als 20 Zeichen sein";
-                return true;
-            }
-
-            if (mViewModel.Model.Length > 20)
-            {
-                mViewModel.ErrorMessage = "Modell darf nicht länger als 10 Zeichen sein";
-                return true;
-            }
-
             return false;
         }
     }

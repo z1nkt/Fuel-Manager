@@ -43,7 +43,6 @@ namespace Fuel.Manager.Client.ViewModels
                 _SelectedEmployee = value;
                 if (_SelectedEmployee != null)
                 {
-                    //updates the detail fields to the values of the selected item
                     EmployeeNo = _SelectedEmployee.EmployeeNo;
                     Username = _SelectedEmployee.Username;
                     Firstname = _SelectedEmployee.Firstname;
@@ -51,7 +50,6 @@ namespace Fuel.Manager.Client.ViewModels
                     IsAdmin = _SelectedEmployee.IsAdmin;
                     Password = _SelectedEmployee.Password;
 
-                    //updates the list of cars
                     EmployeeController.GetCarsFromEmployeeID(_SelectedEmployee.Id);
                 }
 
