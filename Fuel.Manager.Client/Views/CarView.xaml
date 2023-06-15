@@ -9,12 +9,6 @@
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150" BorderBrush="Black" BorderThickness="1">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="BorderThickness" Value="1" />
-                    <Setter Property="BorderBrush" Value="Black" />
-                </Style>
-            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate >
                 <DataTemplate DataType="{x:Type models:Car}" >
                     <WrapPanel Margin="0,0,0,5">
