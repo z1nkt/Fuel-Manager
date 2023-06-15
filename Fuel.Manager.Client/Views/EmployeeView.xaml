@@ -5,36 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              xmlns:helper="clr-namespace:Fuel.Manager.Client.Helper"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" Width="612">
+             mc:Ignorable="d" Width="620" Height="350">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
-        <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Margin="0,0,0,5" MaxHeight="130" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="130">
-            <ListBox.Template>
-                <ControlTemplate>
-                    <DockPanel LastChildFill="True">
-                        <Grid DockPanel.Dock="Top" Height="30">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
-                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
-                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
-                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" HorizontalAlignment="Left">Nr.</Label>
-                            <Label Grid.Column="1" HorizontalAlignment="Left">Vorname</Label>
-                            <Label Grid.Column="2" HorizontalAlignment="Left">Nachname</Label>
-                            <Label Grid.Column="3" HorizontalAlignment="Left">Admin</Label>
-                        </Grid>
-                        <ItemsPresenter></ItemsPresenter>
-                    </DockPanel>
-                </ControlTemplate>
-            </ListBox.Template>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="BorderThickness" Value="1" />
-                    <Setter Property="BorderBrush" Value="Black" />
-                </Style>
-            </ListBox.ItemContainerStyle>
+        <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" MaxHeight="130" MaxWidth="500" MinWidth="500" MinHeight="130" Width="600">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Employee}">
                     <WrapPanel>
@@ -78,13 +52,13 @@
                     <CheckBox IsChecked="{Binding IsAdmin}" MinWidth="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                 </WrapPanel>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Width="272">
                 <WrapPanel Margin="0,0,0,10">
                     <Button Command="{Binding AddCarCommand}" Content=" ➕ Hinzufügen " Margin="0,0,5,0"/>
                     <Button Command="{Binding RemoveCarCommand}" Content="❌ Entfernen "/>
                 </WrapPanel>
-                <ListView ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="280" MaxWidth="280" MinHeight="150" MaxHeight="150">
-                    <ListView.ItemTemplate>
+                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="280" MaxWidth="280" MinHeight="150" MaxHeight="150">
+                    <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:Car}">
                             <WrapPanel>
                                 <TextBlock Text="{Binding LicensePlate}" MinWidth="90" MaxWidth="90"/>
@@ -92,8 +66,8 @@
                                 <TextBlock Text="{Binding Model}" MinWidth="90" MaxWidth="90"/>
                             </WrapPanel>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </WrapPanel>
     </StackPanel>

@@ -45,9 +45,6 @@ namespace Fuel.Manager.Client.Helper
 
             PasswordBox passwordBox = new PasswordBox();
             passwordBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF4843AE"));
-            passwordBox.Width = 250;
-            passwordBox.BorderBrush = new SolidColorBrush(Colors.White);
-            passwordBox.SelectionBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF4843AE"));
             passwordBox.CaretBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF4843AE"));
             passwordBox.PasswordChanged += savedCallback;
             Child = passwordBox;
