@@ -64,27 +64,33 @@ namespace Fuel.Manager.Client.Controllers
 
         public Employee GetNewEmployee()
         {
-            Employee e = new Employee();
-            e.EmployeeNo = mViewModel.EmployeeNo;
-            e.Username = mViewModel.Username;
-            e.Firstname = mViewModel.Firstname;
-            e.Lastname = mViewModel.Lastname;
-            e.IsAdmin = mViewModel.IsAdmin;
-            return e;
+            Employee employee = new Employee();
+            employee.EmployeeNo = mViewModel.EmployeeNo;
+            employee.Username = mViewModel.Username;
+            employee.Firstname = mViewModel.Firstname;
+            employee.Lastname = mViewModel.Lastname;
+            employee.IsAdmin = mViewModel.IsAdmin;
+
+            if (ValidateEmployeeObject(employee)) return null;
+
+            return employee;
         }
 
         public Employee GetEditedEmployee()
         {
-            Employee e = GetEmployee();
-            Employee edited = new Employee();
-            edited.Id = e.Id;
-            edited.EmployeeNo = mViewModel.EmployeeNo;
-            edited.Username = mViewModel.Username;
-            edited.Firstname = mViewModel.Firstname;
-            edited.Lastname = mViewModel.Lastname;
-            edited.IsAdmin = mViewModel.IsAdmin;
-            edited.Version = e.Version;
-            return edited;
+            Employee employee = GetEmployee();
+
+            if (employee == null) return employee;
+
+            Employee editedEmployee = new Employee();
+            editedEmployee.Id = employee.Id;
+            editedEmployee.EmployeeNo = mViewModel.EmployeeNo;
+            editedEmployee.Username = mViewModel.Username;
+            editedEmployee.Firstname = mViewModel.Firstname;
+            editedEmployee.Lastname = mViewModel.Lastname;
+            editedEmployee.IsAdmin = mViewModel.IsAdmin;
+            editedEmployee.Version = employee.Version;
+            return editedEmployee;
         }
 
         public List<Car> GetCarsOfEmployee()
@@ -211,23 +217,24 @@ namespace Fuel.Manager.Client.Controllers
         }
 
 
-        public bool ValidateInput()
+        public bool ValidateEmployeeObject(Employee employee)
         {
             mViewModel.ErrorMessage = "";
-            if (string.IsNullOrEmpty(mViewModel.Username))
+
+            if (string.IsNullOrEmpty(employee.Username))
             {
                 mViewModel.ErrorMessage = "Es muss ein Benutzername angegeben werden!";
                 return true;
             }
 
 
-            if (string.IsNullOrEmpty(mViewModel.Lastname))
+            if (string.IsNullOrEmpty(employee.Lastname))
             {
                 mViewModel.ErrorMessage = "Es muss ein Nachname angegeben werden!";
                 return true;
             }
 
-            if (string.IsNullOrEmpty(mViewModel.Password))
+            if (string.IsNullOrEmpty(employee.Password))
             {
                 mViewModel.ErrorMessage = "Es muss ein Password angegeben werden!";
                 return true;

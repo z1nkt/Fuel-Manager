@@ -48,8 +48,9 @@ namespace Fuel.Manager.Client.Controllers
             refuel.Amount = mViewModel.Amount;
             refuel.Price = mViewModel.Price;
 
-            if(ValidateRefuelObject(refuel)) return null;
-            else return refuel;
+            if (ValidateRefuelObject(refuel)) return null;
+            
+            return refuel;
 
 
 
@@ -59,15 +60,19 @@ namespace Fuel.Manager.Client.Controllers
         public Refuel GetEditedRefuel()
         {
             Refuel refuel = GetRefuel();
-            Refuel edited = new Refuel();
-            edited.Id = refuel.Id;
-            edited.Car = mViewModel.SelectedCar;
-            edited.Date = mViewModel.RefuelDate;
-            edited.Mileage = mViewModel.Mileage;
-            edited.Amount = mViewModel.Amount;
-            edited.Price = mViewModel.Price;
-            edited.Version = refuel.Version;
-            return edited;
+
+            if (refuel == null) return refuel;
+
+            Refuel editedRefuel = new Refuel();
+            editedRefuel.Id = refuel.Id;
+            editedRefuel.Car = mViewModel.SelectedCar;
+            editedRefuel.Date = mViewModel.RefuelDate;
+            editedRefuel.Mileage = mViewModel.Mileage;
+            editedRefuel.Amount = mViewModel.Amount;
+            editedRefuel.Price = mViewModel.Price;
+            editedRefuel.Version = refuel.Version;
+            return editedRefuel;
+
         }
 
         public void SetControllerData(List<Refuel> refuelList, List<Car> carList, List<Car> employeeCarList)
@@ -113,18 +118,6 @@ namespace Fuel.Manager.Client.Controllers
                 return true;
 
             }
-            return false;
-        }
-
-        public bool ValidateInput()
-        {
-            mViewModel.ErrorMessage = "";
-            /*if (string.IsNullOrEmpty(mViewModel.SelectedCar.LicensePlate))
-            {
-                mViewModel.ErrorMessage = "Es muss ein Fahrzeug ausgewählt sein";
-                return true;
-            }*/
-
             if (decimal.IsNegative(mViewModel.Price))
             {
                 mViewModel.ErrorMessage = "Preis darf nicht negativ sein!";
@@ -142,7 +135,6 @@ namespace Fuel.Manager.Client.Controllers
                 mViewModel.ErrorMessage = "Kilometerstand kann nicht negativ sein!";
                 return true;
             }
-
             return false;
         }
     }

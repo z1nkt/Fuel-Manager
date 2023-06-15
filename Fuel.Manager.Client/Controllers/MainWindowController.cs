@@ -105,7 +105,6 @@ namespace Fuel.Manager.Client.Controllers
                     Refuel newRefuel = RefuelController.GetNewRefuel();
 
                     if (newRefuel == null) break;
-                    if (RefuelController.ValidateInput()) break;
 
 
                     client = new HttpClient();
@@ -127,7 +126,8 @@ namespace Fuel.Manager.Client.Controllers
                     Car newCar = CarController.GetNewCar();
                     LoadAllCars();
 
-                    if (CarController.ValidateInput()) break;
+                    if (newCar == null) break;
+                    
                     foreach (Car c in allCars)
                     {
                         if (newCar.LicensePlate.ToLower() == c.LicensePlate.ToLower())
@@ -163,8 +163,9 @@ namespace Fuel.Manager.Client.Controllers
                     Employee newEmployee = EmployeeController.GetNewEmployee();
                     if (newEmployee == null)
                     {
-                        mViewModel.ErrorMessage = "Es wurden keine Angaben eingegeben bitte erneut Versuchen";
+                        break;
                     }
+
                     LoadAllEmployees();
 
                     if (EmployeeController.ValidateInput()) break;
@@ -285,14 +286,15 @@ namespace Fuel.Manager.Client.Controllers
             {
                 case "Tanken":
                     //save edited Refuel object on Server
-                    Refuel refuel = RefuelController.GetEditedRefuel();
+                    Refuel editedRefuel = RefuelController.GetEditedRefuel();
+                    if (editedRefuel == null) break;
+
                     LoadCarsAndRefuelsFromAllEmployees();
 
-                    if (RefuelController.ValidateInput()) break;
 
                     client = new HttpClient();
 
-                    values = Mapper.RefuelToJson(refuel);
+                    values = Mapper.RefuelToJson(editedRefuel);
                     response = await client.PostAsync("http://localhost:5115/api/refuel/edit", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
@@ -305,11 +307,11 @@ namespace Fuel.Manager.Client.Controllers
                     break;
                 case "Fahrzeuge":
                     Car editedCar = CarController.GetEditedCar();
+                    if(editedCar == null) break;
+
                     bool licenseOk = true;
 
                     LoadAllCars();
-
-                    if (CarController.ValidateInput()) break;
 
                     foreach (Car c in allCars)
                     {
@@ -325,8 +327,6 @@ namespace Fuel.Manager.Client.Controllers
                         break;
                     }
 
-
-
                     client = new HttpClient();
 
                     values = Mapper.CarToJson(editedCar);
@@ -340,8 +340,10 @@ namespace Fuel.Manager.Client.Controllers
                     LoadAllCars();
                     CarController.SetIsEnabled();
                     break;
+
                 case "Mitarbeiter":
                     Employee editedEmployee = EmployeeController.GetEditedEmployee();
+                    if(editedEmployee == null) break;
                     bool ok = true;
 
                     LoadAllEmployees();

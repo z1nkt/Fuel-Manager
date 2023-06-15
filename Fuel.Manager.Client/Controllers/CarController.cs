@@ -32,24 +32,29 @@ namespace Fuel.Manager.Client.Controllers
 
         public Car GetNewCar()
         {
-            Car c = new Car();
-            c.LicensePlate = mViewModel.LicensePlate;
-            c.Vendor = mViewModel.Vendor;
-            c.Model = mViewModel.Model;
+            Car car = new Car();
+            car.LicensePlate = mViewModel.LicensePlate;
+            car.Vendor = mViewModel.Vendor;
+            car.Model = mViewModel.Model;
 
-            return c;
+            if(ValidateCarObject(car)) return null;
+
+            return car;
         }
 
         public Car GetEditedCar()
         {
-            Car c = GetCar();
-            Car edited = new Car();
-            edited.Id = c.Id;
-            edited.LicensePlate = mViewModel.LicensePlate;
-            edited.Vendor = mViewModel.Vendor;
-            edited.Model = mViewModel.Model;
-            edited.Version = c.Version;
-            return edited;
+            Car car = GetCar();
+
+            if (car == null) return car;
+
+            Car editedCar = new Car();
+            editedCar.Id = car.Id;
+            editedCar.LicensePlate = mViewModel.LicensePlate;
+            editedCar.Vendor = mViewModel.Vendor;
+            editedCar.Model = mViewModel.Model;
+            editedCar.Version = car.Version;
+            return editedCar;
         }
 
         public void SetControllerData(List<Car> carList)
@@ -68,23 +73,23 @@ namespace Fuel.Manager.Client.Controllers
             mViewModel.IsEnabled = !mViewModel.IsEnabled;
         }
 
-        public bool ValidateInput()
+        public bool ValidateCarObject(Car car)
         {
             mViewModel.ErrorMessage = "";
-            if (string.IsNullOrEmpty(mViewModel.LicensePlate))
+            if (string.IsNullOrEmpty(car.LicensePlate))
             {
                 mViewModel.ErrorMessage = "Es muss ein Kennzeichen angegeben werden!";
                 return true;
             }
 
 
-            if (string.IsNullOrEmpty(mViewModel.Vendor))
+            if (string.IsNullOrEmpty(car.Vendor))
             {
                 mViewModel.ErrorMessage = "Es muss ein Hersteller angegeben werden!";
                 return true;
             }
 
-            if (string.IsNullOrEmpty(mViewModel.Model))
+            if (string.IsNullOrEmpty(car.Model))
             {
                 mViewModel.ErrorMessage = "Es muss ein Modell angegeben werden!";
                 return true;
