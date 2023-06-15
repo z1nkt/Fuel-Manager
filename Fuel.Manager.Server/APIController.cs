@@ -66,6 +66,8 @@ namespace Fuel.Manager.Server
 
         public IResult Login(Login login)
         {
+            Console.WriteLine(login.Password);
+            Console.WriteLine(login.Username);
 
             if (login == null)
             {
@@ -211,21 +213,21 @@ namespace Fuel.Manager.Server
             }
         }
 
-        private IResult SaveEditedEmployee(AddEmployee ie)
+        private IResult SaveEditedEmployee(AddEmployee addEmployee)
         {
             try
             {
-
-                ie.Password = BCrypt.Net.BCrypt.HashPassword(ie.Password);
-                Employee e = new Employee();
-                e.Id = ie.Id;
-                e.EmployeeNo = ie.EmployeeNo;
-                e.Username = ie.Username;
-                e.Password = ie.Password;
-                e.Firstname = ie.Firstname;
-                e.Lastname = ie.Lastname;
-                e.IsAdmin = Convert.ToBoolean(ie.IsAdmin);
-                _employeeService.Update(e);
+                Console.WriteLine(addEmployee.Password);
+                addEmployee.Password = BCrypt.Net.BCrypt.HashPassword(addEmployee.Password);
+                Employee employee = new Employee();
+                employee.Id = addEmployee.Id;
+                employee.EmployeeNo = addEmployee.EmployeeNo;
+                employee.Username = addEmployee.Username;
+                employee.Password = addEmployee.Password;
+                employee.Firstname = addEmployee.Firstname;
+                employee.Lastname = addEmployee.Lastname;
+                employee.IsAdmin = Convert.ToBoolean(addEmployee.IsAdmin);
+                _employeeService.Update(employee);
 
                 return Results.Ok();
             }
@@ -235,22 +237,22 @@ namespace Fuel.Manager.Server
             }
         }
 
-        private IResult DeleteEmployee(AddEmployee ie)
+        private IResult DeleteEmployee(AddEmployee addEmployee)
         {
             try
             {
-                Employee e = new Employee();
+                Employee employee = new Employee();
 
-                e.Id = ie.Id;
-                e.EmployeeNo = ie.EmployeeNo;
-                e.Username = ie.Username;
-                e.Password = ie.Password;
-                e.Firstname = ie.Firstname;
-                e.Lastname = ie.Lastname;
-                e.IsAdmin = Convert.ToBoolean(ie.IsAdmin);
-                e.Version = ie.Version;
+                employee.Id = addEmployee.Id;
+                employee.EmployeeNo = addEmployee.EmployeeNo;
+                employee.Username = addEmployee.Username;
+                employee.Password = addEmployee.Password;
+                employee.Firstname = addEmployee.Firstname;
+                employee.Lastname = addEmployee.Lastname;
+                employee.IsAdmin = Convert.ToBoolean(addEmployee.IsAdmin);
+                employee.Version = addEmployee.Version;
 
-                _employeeService.Delete(e);
+                _employeeService.Delete(employee);
                 return Results.Ok();
             }
             catch (Exception ex)
@@ -261,12 +263,12 @@ namespace Fuel.Manager.Server
 
         private IResult AddEmployeeCarRelation(AddEmployeeCarRelation ecr)
         {
-            Employee e = _employeeService.GetById(ecr.EmployeeId);
-            Car c = _carService.GetById(ecr.CarId);
+            Employee employee = _employeeService.GetById(ecr.EmployeeId);
+            Car car = _carService.GetById(ecr.CarId);
 
             EmployeeToCarRelation employeeToCarRelation = new EmployeeToCarRelation();
-            employeeToCarRelation.Employee = e;
-            employeeToCarRelation.Car = c;
+            employeeToCarRelation.Employee = employee;
+            employeeToCarRelation.Car = car;
 
             try
             {
