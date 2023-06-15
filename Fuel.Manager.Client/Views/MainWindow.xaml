@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
         mc:Ignorable="d"
         Title="Fuel-Manager" Height="600" Width="1000">
-    <DockPanel LastChildFill="False" Margin="15,15,0,0">
+    <DockPanel LastChildFill="False" Margin="15,15,10,7">
         <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,20">
             <Image Source="/Ressources/Tankstelle.png" Height="69" Width="80"></Image>
             <Button Command="{Binding NewCommand}" Content="Neu" Width="NaN" Margin="60,0,10,0" MinWidth="80" Background="#FF324ACA" FontSize="12" FontWeight="Bold" Foreground="White" MaxHeight="30"/>
@@ -22,7 +22,7 @@
         <StackPanel DockPanel.Dock="Left" MinWidth="200" Margin="0,0,22,0">
             <ListBox ItemsSource="{Binding Mode}" SelectedItem="{Binding SelectedMode}"/>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Left" MinWidth="600" Width="720" Height="400">
+        <StackPanel DockPanel.Dock="Left" MinWidth="600" Width="720" Height="440">
             <Label Content="{Binding SelectedMode}"/>
             <Frame MinWidth="600" NavigationUIVisibility="Hidden" Content="{Binding SelectedPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             </Frame>

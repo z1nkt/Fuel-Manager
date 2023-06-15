@@ -23,6 +23,7 @@ namespace Fuel.Manager.Client.Views
         public RefuelView()
         {
             InitializeComponent();
+            dpDate.SelectedDate = DateTime.Now;
         }
     }
 }

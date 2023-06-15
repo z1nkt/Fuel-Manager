@@ -65,6 +65,17 @@ namespace Fuel.Manager.Client.ViewModels
                 OnPropertyChanged(nameof(SelectedRefuel));
             }
         }
+        public bool _enabled { get; set; }
+
+        public bool enabled
+        {
+            get => _enabled;
+            set
+            {
+                _enabled = value;
+                OnPropertyChanged("enabled");
+            }
+        }
 
         private DateTime _refuelDate;
         public DateTime RefuelDate
@@ -162,6 +173,7 @@ namespace Fuel.Manager.Client.ViewModels
             Cars = new ObservableCollection<Car>();
             Refuels = new ObservableCollection<Refuel>();
             EmployeeCars = new ObservableCollection<Car>();
+            RefuelDate = DateTime.Today;
             ErrorMessage = "";
         }
     }

@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              xmlns:helper="clr-namespace:Fuel.Manager.Client.Helper"
-             mc:Ignorable="d" Width="620" Height="373">
-    <StackPanel>
+             mc:Ignorable="d" Width="622" Height="430">
+    <StackPanel Height="430" VerticalAlignment="Top">
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListView ItemsSource="{Binding Employees}" Margin="0,0,0,10" MinHeight="150" SelectedItem="{Binding SelectedEmployee}" ScrollViewer.CanContentScroll="True" MaxHeight="150" Width="612">
             <ListView.ItemContainerStyle>
@@ -24,58 +24,68 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
         <WrapPanel>
-            <Label Content="{Binding Firstname}" Width="5"></Label>
-            <Label Content ="{Binding Lastname}" Width="5"></Label>
-            <Label Content ="{Binding EmployeeNo}" Width="5"></Label>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat =" {0} {1} ({2}) ">
+                        <Binding Path="Firstname"></Binding>
+                        <Binding Path="Lastname" ></Binding>
+                        <Binding Path="EmployeeNo" ></Binding>
+                    </MultiBinding>
+                </TextBlock.Text>
+
+            </TextBlock>
         </WrapPanel>
-        <WrapPanel>
-            <StackPanel Margin="0,0,20,0" IsEnabled="{Binding IsEnabled}">
-                <WrapPanel Margin="0,0,0,5">
-                    <Label Content="Personalnummer" MinWidth="100"/>
-                    <TextBox Text="{Binding EmployeeNo}" MinWidth="200"/>
-                </WrapPanel>
-                <WrapPanel Margin="0,0,0,5">
-                    <Label Content="Benutzername" MinWidth="100"/>
-                    <TextBox Text="{Binding Username }" MinWidth="200"/>
-                </WrapPanel>
-                <WrapPanel Margin="0,0,0,5">
-                    <Label Content="Passwort" MinWidth="100"/>
-                    <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" MinWidth="200" Width="197"/>
-                </WrapPanel>
-                <WrapPanel Margin="0,0,0,5">
-                    <Label Content="Vorname" MinWidth="100"/>
-                    <TextBox Text="{Binding Firstname}" MinWidth="200"/>
-                </WrapPanel>
-                <WrapPanel Margin="0,0,0,5">
-                    <Label Content="Nachname" MinWidth="100"/>
-                    <TextBox Text="{Binding Lastname}" MinWidth="200"/>
-                </WrapPanel>
-                <WrapPanel Margin="0,0,0,5">
-                    <Label Content="Administrator" MinWidth="100"/>
-                    <CheckBox IsChecked="{Binding IsAdmin}" MinWidth="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                </WrapPanel>
-            </StackPanel>
-            <StackPanel Width="272">
-                <WrapPanel Margin="0,0,0,10">
-                    <Button Command="{Binding AddCarCommand}" Content=" ➕ Hinzufügen " Margin="0,0,5,0"/>
-                    <Button Command="{Binding RemoveCarCommand}" Content="❌ Entfernen "/>
-                </WrapPanel>
-                <ListView ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,51" MinHeight="150" Width="270">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Width="Auto" Header="Kennzeichen" DisplayMemberBinding="{Binding LicensePlate}"/>
-                            <GridViewColumn Width="Auto" Header="Hersteller" DisplayMemberBinding="{Binding Vendor}"/>
-                            <GridViewColumn Width="Auto" Header="Modell" DisplayMemberBinding="{Binding Model}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
-        </WrapPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Height="214" >
+            <WrapPanel>
+                <StackPanel Margin="0,0,20,0" IsEnabled="{Binding IsEnabled}" Height="221">
+                    <WrapPanel Margin="0,0,0,5">
+                        <Label Content="Personalnummer" MinWidth="100"/>
+                        <TextBox Text="{Binding EmployeeNo}" MinWidth="200"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <Label Content="Benutzername" MinWidth="100"/>
+                        <TextBox Text="{Binding Username }" MinWidth="200"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <Label Content="Passwort" MinWidth="100"/>
+                        <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" MinWidth="200" Width="197"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <Label Content="Vorname" MinWidth="100"/>
+                        <TextBox Text="{Binding Firstname}" MinWidth="200"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <Label Content="Nachname" MinWidth="100"/>
+                        <TextBox Text="{Binding Lastname}" MinWidth="200"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0,0,0,5">
+                        <Label Content="Administrator" MinWidth="100"/>
+                        <CheckBox IsChecked="{Binding IsAdmin}" MinWidth="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    </WrapPanel>
+                </StackPanel>
+                <StackPanel Width="272">
+                    <WrapPanel Margin="0,0,0,10">
+                        <Button Command="{Binding AddCarCommand}" Content=" ➕ Hinzufügen " Margin="0,0,5,0"/>
+                        <Button Command="{Binding RemoveCarCommand}" Content="❌ Entfernen "/>
+                    </WrapPanel>
+                    <ListView ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,51" MinHeight="150" Width="270">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="Auto" Header="Kennzeichen" DisplayMemberBinding="{Binding LicensePlate}"/>
+                                <GridViewColumn Width="Auto" Header="Hersteller" DisplayMemberBinding="{Binding Vendor}"/>
+                                <GridViewColumn Width="Auto" Header="Modell" DisplayMemberBinding="{Binding Model}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </WrapPanel>
+        </Border >
     </StackPanel>
 </Page>

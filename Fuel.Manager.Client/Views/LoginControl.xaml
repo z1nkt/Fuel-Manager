@@ -22,7 +22,7 @@
                     <Label Content="Passwort"/>
                     <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" />
                 </StackPanel>
-                <Button Margin="0 20 0 0" Command="{Binding LoginCommand}" TabIndex="2" Content="Login"/>
+                <Button Margin="0 20 0 0" Command="{Binding LoginCommand}" TabIndex="2" Content="Login" Background="#FF324ACA" FontSize="12" FontWeight="Bold" Foreground="White"/>
             </StackPanel>
             <TextBlock Margin="5" Text="{Binding ErrorMessage, Mode=TwoWay}" Foreground="Red"
                        TextAlignment="Center" TextWrapping="Wrap"/>

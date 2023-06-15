@@ -568,6 +568,8 @@ namespace Fuel.Manager.Client.Controllers
             var responseString = await response.Content.ReadAsStringAsync();
 
             allRefuels = Mapper.JsonToRefuelList(responseString);
+
+            allRefuels.Sort((el1, el2) => DateTime.Compare(el1.Date, el2.Date));
         }
 
         public void Initialize()

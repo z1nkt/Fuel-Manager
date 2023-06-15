@@ -22,6 +22,11 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBlock>
+            <TextBlock.Text>
+                <Binding Path="LicensePlate"/>
+            </TextBlock.Text>
+        </TextBlock>
         <StackPanel IsEnabled="{Binding IsEnabled}">
             <WrapPanel Margin="0,0,0,5">
                 <Label Content="Kennzeichen" MinWidth="100"/>

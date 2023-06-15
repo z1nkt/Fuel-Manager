@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
              xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              mc:Ignorable="d" 
-             d:Width="620" Height="350">
+             d:Width="620" Height="361">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListView ItemsSource="{Binding Refuels}" Margin="0,0,0,10" MinHeight="150" SelectedItem="{Binding SelectedRefuel}" ScrollViewer.CanContentScroll="True" MaxHeight="150" Width="613">
@@ -25,7 +25,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel IsEnabled="{Binding IsEnabled}" >
+        <TextBlock>
+            <TextBlock.Text>
+                <MultiBinding StringFormat =" {0}">
+                    <Binding Path="RefuelDate"></Binding>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <StackPanel IsEnabled="{Binding IsEnabled}" Height="167" >
         <WrapPanel Margin="0,0,0,5">
             <Label Content="Fahrzeug" MinWidth="100"/>
                 <ComboBox MinWidth="100" ItemsSource="{Binding Path=EmployeeCars, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
@@ -38,7 +45,7 @@
         </WrapPanel>
         <WrapPanel Margin="0,0,0,5">
             <Label Content="Datum" MinWidth="100"/>
-            <DatePicker MinWidth="100" SelectedDate="{Binding RefuelDate}"/>
+                <DatePicker MinWidth="100" SelectedDate="{Binding RefuelDate}"  x:Name ="dpDate"/>
             <Button HorizontalAlignment="Center" Content="Heute" Command="{Binding TodayCommand}" MinWidth="100" Margin="15,0,0,0" />
         </WrapPanel>
         <WrapPanel Margin="0,0,0,5">
