@@ -31,7 +31,7 @@ namespace ServerTest.Services
             // Arrange
             var cars = new List<Car>
         {
-            new Car { Id = 1, Vendor = "Toyota", Model = "Corolla" },
+            new Car { Id = 1, Vendor = "Toyota", Model = "Supra" },
             new Car { Id = 2, Vendor = "Honda", Model = "Civic" }
         };
             _carRepositoryMock.Setup(x => x.GetAll()).Returns(cars);
@@ -48,7 +48,7 @@ namespace ServerTest.Services
         {
             // Arrange
             var carId = 1;
-            var car = new Car { Id = carId, Vendor = "Toyota", Model = "Corolla" };
+            var car = new Car { Id = carId, Vendor = "Toyota", Model = "Supra" };
             _carRepositoryMock.Setup(x => x.GetById(carId)).Returns(car);
 
             // Act
@@ -62,7 +62,7 @@ namespace ServerTest.Services
         public void Create_CallsCarRepositoryCreate()
         {
             // Arrange
-            var car = new Car { Id = 1, Vendor = "Toyota", Model = "Corolla" };
+            var car = new Car { Id = 1, Vendor = "Toyota", Model = "Supra" };
 
             // Act
             _carService.Create(car);
@@ -75,7 +75,7 @@ namespace ServerTest.Services
         public void Update_CallsCarRepositoryUpdate()
         {
             // Arrange
-            var car = new Car { Id = 1, Vendor = "Toyota", Model = "Corolla" };
+            var car = new Car { Id = 1, Vendor = "Toyota", Model = "Supra" };
 
             // Act
             _carService.Update(car);
@@ -88,7 +88,7 @@ namespace ServerTest.Services
         public void Delete_CallsCarRepositoryDelete()
         {
             // Arrange
-            var car = new Car { Id = 1, Vendor = "Toyota", Model = "Corolla" };
+            var car = new Car { Id = 1, Vendor = "Toyota", Model = "Supra" };
 
             // Act
             _carService.Delete(car);

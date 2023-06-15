@@ -29,8 +29,8 @@ namespace ServerTest.Services
             {
                 new Employee {
                     Id = 1,
-                    Username = "Hans",
-                    Lastname = "Peter",
+                    Username = "Gustav",
+                    Lastname = "Hartgas",
                     EmployeeNo = "1PCR9",
                     IsAdmin = true,
                 },

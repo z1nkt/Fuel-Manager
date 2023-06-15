@@ -57,14 +57,5 @@ namespace Fuel.Manager.Server.Services.Implementation
                 return null;
             }
         }
-
-        public void ChangePassword(string username, string oldPassword, string newPassword)
-        {
-            Employee e = _employeeRepository.GetByUsername(username);
-            e.Password = BCrypt.Net.BCrypt.ValidateAndReplacePassword(oldPassword, e.Password, newPassword);
-            
-
-            _employeeRepository.Update(e);
-        }
     }
 }
