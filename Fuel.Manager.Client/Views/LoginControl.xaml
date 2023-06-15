@@ -13,13 +13,13 @@
             <Image Source ="/Ressources/Tankstelle.png" Height="69" Width="80"/>
             <StackPanel Width="200">
                 <StackPanel Margin="0 10">
-                    <Label Content="Username"/>
+                    <Label Content="Benutzername"/>
                     <TextBox TabIndex="0"
                              HorizontalContentAlignment="Left"
                              Text="{Binding Username}"/>
                 </StackPanel>
                 <StackPanel>
-                    <Label Content="Password"/>
+                    <Label Content="Passwort"/>
                     <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" />
                 </StackPanel>
                 <Button Margin="0 20 0 0" Command="{Binding LoginCommand}" TabIndex="2" Content="Login"/>
