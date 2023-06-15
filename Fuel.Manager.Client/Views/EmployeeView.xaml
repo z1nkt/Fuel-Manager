@@ -5,25 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              xmlns:helper="clr-namespace:Fuel.Manager.Client.Helper"
-             mc:Ignorable="d" Width="620" Height="350">
+             mc:Ignorable="d" Width="620" Height="373">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
-        <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" MaxHeight="130" MaxWidth="500" MinWidth="500" MinHeight="130" Width="600">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:Employee}">
-                    <WrapPanel>
-                        <TextBlock Text="{Binding EmployeeNo}" MinWidth="120" MaxWidth="120"/>
-                        <TextBlock Text="{Binding Firstname}" MinWidth="120" MaxWidth="120"/>
-                        <TextBlock Text="{Binding Lastname}" MinWidth="120" MaxWidth="120"/>
-                        <TextBlock Text="{Binding IsAdmin}" MinWidth="120" MaxWidth="120"/>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView ItemsSource="{Binding Employees}" Margin="0,0,0,10" MinHeight="150" SelectedItem="{Binding SelectedEmployee}" ScrollViewer.CanContentScroll="True" MaxHeight="150" Width="612">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto" Header="Personalnummer" DisplayMemberBinding="{Binding EmployeeNo}"/>
+                    <GridViewColumn Width="Auto" Header="Vorname" DisplayMemberBinding="{Binding Firstname}"/>
+                    <GridViewColumn Width="Auto" Header="Nachname" DisplayMemberBinding="{Binding Lastname}"/>
+                    <GridViewColumn Width="Auto" Header="Nutzername" DisplayMemberBinding="{Binding Username}"/>
+                    <GridViewColumn Width="Auto" Header="Admin" DisplayMemberBinding="{Binding IsAdmin}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <WrapPanel>
-            <Label Content="{Binding Firstname}"></Label>
-            <Label Content ="{Binding Lastname}"></Label>
-            <Label Content ="{Binding EmployeeNo}"></Label>
+            <Label Content="{Binding Firstname}" Width="5"></Label>
+            <Label Content ="{Binding Lastname}" Width="5"></Label>
+            <Label Content ="{Binding EmployeeNo}" Width="5"></Label>
         </WrapPanel>
         <WrapPanel>
             <StackPanel Margin="0,0,20,0" IsEnabled="{Binding IsEnabled}">
@@ -57,17 +61,20 @@
                     <Button Command="{Binding AddCarCommand}" Content=" ➕ Hinzufügen " Margin="0,0,5,0"/>
                     <Button Command="{Binding RemoveCarCommand}" Content="❌ Entfernen "/>
                 </WrapPanel>
-                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="280" MaxWidth="280" MinHeight="150" MaxHeight="150">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type models:Car}">
-                            <WrapPanel>
-                                <TextBlock Text="{Binding LicensePlate}" MinWidth="90" MaxWidth="90"/>
-                                <TextBlock Text="{Binding Vendor}" MinWidth="90" MaxWidth="90"/>
-                                <TextBlock Text="{Binding Model}" MinWidth="90" MaxWidth="90"/>
-                            </WrapPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <ListView ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,51" MinHeight="150" Width="270">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="Auto" Header="Kennzeichen" DisplayMemberBinding="{Binding LicensePlate}"/>
+                            <GridViewColumn Width="Auto" Header="Hersteller" DisplayMemberBinding="{Binding Vendor}"/>
+                            <GridViewColumn Width="Auto" Header="Modell" DisplayMemberBinding="{Binding Model}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
         </WrapPanel>
     </StackPanel>

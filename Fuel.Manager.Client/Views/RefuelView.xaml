@@ -9,17 +9,22 @@
              d:Width="620" Height="350">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
-        <ListBox ItemsSource="{Binding Refuels}" SelectedItem="{Binding SelectedRefuel}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:Refuel}">
-                    <WrapPanel>
-                        <TextBlock Text="{Binding Date, StringFormat='dd-MM-yyyy'}" MinWidth="160" MaxWidth="200"/>
-                        <TextBlock Text="{Binding Car.LicensePlate}" MinWidth="160" MaxWidth="150"/>
-                        <TextBlock Text="{Binding Price}" MinWidth="160" MaxWidth="150"/>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView ItemsSource="{Binding Refuels}" Margin="0,0,0,10" MinHeight="150" SelectedItem="{Binding SelectedRefuel}" ScrollViewer.CanContentScroll="True" MaxHeight="150" Width="613">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto" Header="Auto" DisplayMemberBinding="{Binding Car.LicensePlate}"/>
+                    <GridViewColumn Width="Auto" Header="Kilometerstand (in km)" DisplayMemberBinding="{Binding Mileage}"/>
+                    <GridViewColumn Width="Auto" Header="Menge (in L)" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Width="Auto" Header="Kosten (in €)" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Width="Auto" Header="Datum" DisplayMemberBinding="{Binding Date}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <StackPanel IsEnabled="{Binding IsEnabled}" >
         <WrapPanel Margin="0,0,0,5">
             <Label Content="Fahrzeug" MinWidth="100"/>

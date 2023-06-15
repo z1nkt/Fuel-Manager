@@ -8,17 +8,20 @@
         mc:Ignorable="d" Width="620" Height="350">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
-        <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150" BorderBrush="Black" BorderThickness="1">
-            <ListBox.ItemTemplate >
-                <DataTemplate DataType="{x:Type models:Car}" >
-                    <WrapPanel Margin="0,0,0,5">
-                        <TextBlock Text="{Binding LicensePlate}" MinWidth="160" />
-                        <TextBlock Text="{Binding Vendor}" MinWidth="160" />
-                        <TextBlock Text="{Binding Model}" MinWidth="160" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView ItemsSource="{Binding Cars}" Margin="0,0,0,10" MinHeight="150" Width="612" SelectedItem="{Binding SelectedCar}" ScrollViewer.CanContentScroll="True" MaxHeight="150">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto" Header="Kennzeichen" DisplayMemberBinding="{Binding LicensePlate}"/>
+                    <GridViewColumn Width="Auto" Header="Hersteller" DisplayMemberBinding="{Binding Vendor}"/>
+                    <GridViewColumn Width="Auto" Header="Modell" DisplayMemberBinding="{Binding Model}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <StackPanel IsEnabled="{Binding IsEnabled}">
             <WrapPanel Margin="0,0,0,5">
                 <Label Content="Kennzeichen" MinWidth="100"/>
