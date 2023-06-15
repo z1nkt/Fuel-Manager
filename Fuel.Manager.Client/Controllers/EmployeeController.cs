@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using Fuel.Manager.Client.ViewModels;
@@ -113,7 +114,7 @@ namespace Fuel.Manager.Client.Controllers
 
         public void ResetEmployeePassword()
         {
-            mView.ResetPasswordBox();
+            mViewModel.Password = "";
         }
 
         public void SetControllerData(List<Employee> employeeList)
@@ -137,13 +138,12 @@ namespace Fuel.Manager.Client.Controllers
          {
              _mLinkCarToEmployeeController = mApplication.Container.Resolve<LinkCarToEmployeeController>();
 
-             //add all cars to Controller
              GetAllCarsForSelection();
 
              Car car = _mLinkCarToEmployeeController.GetSelectedCar();
 
 
-             if (car != null)//without cancel button is not working for obvious reasons :)
+             if (car != null)
              {
                  HttpClient client = new HttpClient();
 
@@ -193,7 +193,6 @@ namespace Fuel.Manager.Client.Controllers
 
             List<Car> allCars = Mapper.JsonToCarList(responseString);
 
-            //remove already added cars
             List<Car> addedCars = mViewModel.Cars.ToList();
             List<Car> toBeRemoved = new List<Car>();
 
@@ -234,7 +233,7 @@ namespace Fuel.Manager.Client.Controllers
                 return true;
             }
 
-            if (string.IsNullOrEmpty(employee.Password))
+            if (string.IsNullOrEmpty(mViewModel.Password))
             {
                 mViewModel.ErrorMessage = "Es muss ein Password angegeben werden!";
                 return true;

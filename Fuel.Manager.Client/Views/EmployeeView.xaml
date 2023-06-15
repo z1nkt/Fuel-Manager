@@ -6,10 +6,35 @@
              xmlns:models="clr-namespace:Fuel.Manager.Client.Models"
              xmlns:helper="clr-namespace:Fuel.Manager.Client.Helper"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" Width="612">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
         <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Margin="0,0,0,5" MaxHeight="130" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="130">
+            <ListBox.Template>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <Grid DockPanel.Dock="Top" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
+                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
+                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
+                                <ColumnDefinition MinWidth="120" MaxWidth="120"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" HorizontalAlignment="Left">Nr.</Label>
+                            <Label Grid.Column="1" HorizontalAlignment="Left">Vorname</Label>
+                            <Label Grid.Column="2" HorizontalAlignment="Left">Nachname</Label>
+                            <Label Grid.Column="3" HorizontalAlignment="Left">Admin</Label>
+                        </Grid>
+                        <ItemsPresenter></ItemsPresenter>
+                    </DockPanel>
+                </ControlTemplate>
+            </ListBox.Template>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:Employee}">
                     <WrapPanel>
@@ -22,26 +47,31 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <WrapPanel>
+            <Label Content="{Binding Firstname}"></Label>
+            <Label Content ="{Binding Lastname}"></Label>
+            <Label Content ="{Binding EmployeeNo}"></Label>
+        </WrapPanel>
+        <WrapPanel>
             <StackPanel Margin="0,0,20,0" IsEnabled="{Binding IsEnabled}">
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Personalnummer" MinWidth="100"/>
-                    <TextBox Text="{Binding EmployeeNo}" MinWidth="100"/>
+                    <TextBox Text="{Binding EmployeeNo}" MinWidth="200"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Benutzername" MinWidth="100"/>
-                    <TextBox Text="{Binding Username }" MinWidth="100"/>
+                    <TextBox Text="{Binding Username }" MinWidth="200"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Passwort" MinWidth="100"/>
-                    <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" MinWidth="100" Width="90" />
+                    <helper:BindablePasswordBox  x:Name="txtPassword" Password="{Binding Password}" MinWidth="200" Width="197"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Vorname" MinWidth="100"/>
-                    <TextBox Text="{Binding Firstname}" MinWidth="100"/>
+                    <TextBox Text="{Binding Firstname}" MinWidth="200"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Nachname" MinWidth="100"/>
-                    <TextBox Text="{Binding Lastname}" MinWidth="100"/>
+                    <TextBox Text="{Binding Lastname}" MinWidth="200"/>
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <Label Content="Administrator" MinWidth="100"/>
@@ -50,11 +80,11 @@
             </StackPanel>
             <StackPanel>
                 <WrapPanel Margin="0,0,0,10">
-                    <Button Command="{Binding AddCarCommand}" Content="Hinzufügen" Margin="0,0,5,0"/>
-                    <Button Command="{Binding RemoveCarCommand}" Content="Entfernen"/>
+                    <Button Command="{Binding AddCarCommand}" Content=" ➕ Hinzufügen " Margin="0,0,5,0"/>
+                    <Button Command="{Binding RemoveCarCommand}" Content="❌ Entfernen "/>
                 </WrapPanel>
-                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="280" MaxWidth="280" MinHeight="150" MaxHeight="150">
-                    <ListBox.ItemTemplate>
+                <ListView ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" MinWidth="280" MaxWidth="280" MinHeight="150" MaxHeight="150">
+                    <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:Car}">
                             <WrapPanel>
                                 <TextBlock Text="{Binding LicensePlate}" MinWidth="90" MaxWidth="90"/>
@@ -62,8 +92,8 @@
                                 <TextBlock Text="{Binding Model}" MinWidth="90" MaxWidth="90"/>
                             </WrapPanel>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </WrapPanel>
     </StackPanel>

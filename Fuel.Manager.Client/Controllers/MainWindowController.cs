@@ -31,7 +31,7 @@ namespace Fuel.Manager.Client.Controllers
         private List<Car> allCars = new List<Car>();
         private List<Refuel> allRefuels = new List<Refuel>();
         private List<Employee> allEmployees = new List<Employee>();
-        private bool isEnabled = false;
+
         public MainWindowController(MainWindow mainWindow, MainWindowViewModel mainViewModel, App app)
         {
             mView = mainWindow;
@@ -56,27 +56,21 @@ namespace Fuel.Manager.Client.Controllers
                 case "Tanken":
                     ClearMessages();
                     RefuelController = new RefuelController(p as RefuelView, mApplication.Container.Resolve<RefuelViewModel>());
-                    //get List of Cars and List of Refuels from Client
                     LoadCarsAndRefuelsFromAllEmployees();
-                    //set RefuelController data
                     RefuelController.SetControllerData(allRefuels,allCars,carsLoggedInUser);
                     break;
 
                 case "Fahrzeuge":
                     ClearMessages();
                     CarController = new CarController(p as CarView, mApplication.Container.Resolve<CarViewModel>());
-                    //get List of Cars from Client
                     LoadAllCars();
-                    //set CarController data
                     CarController.SetControllerData(allCars);
                     break;
 
                 case "Mitarbeiter":
                     ClearMessages();
-                    EmployeeController = new EmployeeController(p as EmployeeView, mApplication.Container.Resolve<EmployeeViewModel>(), mApplication);
-                    //get List of Employees from Client
+                    EmployeeController = new EmployeeController(p as EmployeeView, mApplication.Container.Resolve<EmployeeViewModel>(), mApplication); 
                     LoadAllEmployees();
-                    //set EmployeeController data
                     EmployeeController.SetControllerData(allEmployees);
                     break;
             }
@@ -98,9 +92,7 @@ namespace Fuel.Manager.Client.Controllers
             switch (mViewModel.SelectedMode)
             {
                 case "Tanken":
-
-                    
-
+                    ClearMessages();
                     //save new Refuel object on Server
                     Refuel newRefuel = RefuelController.GetNewRefuel();
 
@@ -114,7 +106,7 @@ namespace Fuel.Manager.Client.Controllers
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Tanken konnte nicht angelegt werden";
+                        mViewModel.ErrorMessage = "Tanken konnte nicht angelegt werden, versuchen Sie es erneut";
                     }
 
                     LoadCarsAndRefuelsFromAllEmployees();
@@ -122,6 +114,8 @@ namespace Fuel.Manager.Client.Controllers
                     break;
 
                 case "Fahrzeuge":
+                    ClearMessages();
+
                     bool licenseOk = true;
                     Car newCar = CarController.GetNewCar();
                     LoadAllCars();
@@ -150,7 +144,7 @@ namespace Fuel.Manager.Client.Controllers
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Auto konnte nicht gespeichert werden";
+                        mViewModel.ErrorMessage = "Fahrzeug konnte nicht angelegtt werden, versuchen Sie es erneut";
                     }
 
                     LoadAllCars();
@@ -158,6 +152,8 @@ namespace Fuel.Manager.Client.Controllers
                     break;
 
                 case "Mitarbeiter":
+                    ClearMessages();
+
                     bool nameOk = true;
                     bool nomOk = true;
                     Employee newEmployee = EmployeeController.GetNewEmployee();
@@ -167,8 +163,6 @@ namespace Fuel.Manager.Client.Controllers
                     }
 
                     LoadAllEmployees();
-
-                    if (EmployeeController.ValidateInput()) break;
 
                     //generate EmployeeNo
                     bool isGenerated = false;
@@ -226,7 +220,7 @@ namespace Fuel.Manager.Client.Controllers
                     var data = new Dictionary<string, string>
                     {
                         { "id", "0" },
-                        { "username", newEmployee.Username },
+                        { "username", newEmployee.Username.ToLower() },
                         { "password", EmployeeController.GetEmployeePassword() },
                         { "firstname", newEmployee.Firstname },
                         { "lastname", newEmployee.Lastname },
@@ -235,14 +229,14 @@ namespace Fuel.Manager.Client.Controllers
                         { "version", "1"}
                     };
 
-                    //EmployeeController.ResetEmployeePassword();
+                    EmployeeController.ResetEmployeePassword();
 
                     values = JsonHelper.DictionaryToJson(data);
                     response = await client.PostAsync("http://localhost:5115/api/employee/new", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Nutzer konnte nicht gespeichert werden";
+                        mViewModel.ErrorMessage = "Nutzer konnte nicht angelegt werden, versuchen Sie es erneut";
                     }
 
                     LoadAllEmployees();
@@ -257,15 +251,18 @@ namespace Fuel.Manager.Client.Controllers
             switch (mViewModel.SelectedMode)
             {
                 case "Mitarbeiter":
+                    ClearMessages();
                     EmployeeController.SetIsEnabled();
                     break;
 
                 case "Tanken":
+                    ClearMessages();
                     Console.WriteLine("Tanken");
                     RefuelController.SetIsEnabled();
                     break;
 
                 case "Fahrzeuge":
+                    ClearMessages();
                     CarController.SetIsEnabled();
                     break;
 
@@ -285,7 +282,8 @@ namespace Fuel.Manager.Client.Controllers
             switch (mViewModel.SelectedMode)
             {
                 case "Tanken":
-                    //save edited Refuel object on Server
+                    ClearMessages();
+
                     Refuel editedRefuel = RefuelController.GetEditedRefuel();
                     if (editedRefuel == null) break;
 
@@ -304,8 +302,11 @@ namespace Fuel.Manager.Client.Controllers
 
                     LoadCarsAndRefuelsFromAllEmployees();
                     RefuelController.SetIsEnabled();
+                    mViewModel.SuccessMessage = "Tanken wurde erfolgreich gespeichert";
                     break;
                 case "Fahrzeuge":
+                    ClearMessages();
+
                     Car editedCar = CarController.GetEditedCar();
                     if(editedCar == null) break;
 
@@ -334,22 +335,22 @@ namespace Fuel.Manager.Client.Controllers
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Auto konnte nicht gespeichert werden";
+                        mViewModel.ErrorMessage = "Fahrzeug konnte nicht gespeichert werden";
                     }
 
                     LoadAllCars();
                     CarController.SetIsEnabled();
+                    mViewModel.SuccessMessage = "Fahrzeug wurde erfolgreich gespeichert";
                     break;
 
                 case "Mitarbeiter":
+                    ClearMessages();
+
                     Employee editedEmployee = EmployeeController.GetEditedEmployee();
                     if(editedEmployee == null) break;
                     bool ok = true;
 
                     LoadAllEmployees();
-
-                    if (EmployeeController.ValidateInput()) break;
-
                     foreach (Employee c in allEmployees)
                     {
                         if (editedEmployee.Username.ToLower() == c.Username.ToLower() && editedEmployee.Id != c.Id)
@@ -375,7 +376,7 @@ namespace Fuel.Manager.Client.Controllers
                     var data = new Dictionary<string, string>
                     {
                         { "id", editedEmployee.Id.ToString() },
-                        { "username", editedEmployee.Username },
+                        { "username", editedEmployee.Username.ToLower() },
                         { "password", EmployeeController.GetEmployeePassword() },
                         { "firstname", editedEmployee.Firstname },
                         { "lastname", editedEmployee.Lastname },
@@ -384,18 +385,19 @@ namespace Fuel.Manager.Client.Controllers
                         { "version", editedEmployee.Version.ToString()}
                     };
 
-                    EmployeeController.ResetEmployeePassword();
+                    
 
                     values = JsonHelper.DictionaryToJson(data);
                     response = await client.PostAsync("http://localhost:5115/api/employee/edit", new StringContent(values, Encoding.UTF8, "application/json"));
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Nutzer konnte nicht gespeichert werden";
+                        mViewModel.ErrorMessage = "Mitarbeiter konnte nicht gespeichert werden";
                     }
-
+                    EmployeeController.ResetEmployeePassword();
                     LoadAllEmployees();
                     EmployeeController.SetIsEnabled();
+                    mViewModel.SuccessMessage = "Mitarbeiter wurde erfolgreich gespeichert";
                     break;
             }
         }
@@ -425,7 +427,9 @@ namespace Fuel.Manager.Client.Controllers
 
                     LoadCarsAndRefuelsFromAllEmployees();
                     LoadAllRefuels();
+                    mViewModel.SuccessMessage = "Tanken wurde erfolgreich gelöscht";
                     break;
+
                 case "Fahrzeuge":
                     bool refuelExists = false;
                     Car carToDelete = CarController.GetCar();
@@ -435,7 +439,7 @@ namespace Fuel.Manager.Client.Controllers
                     {
                         if (r.Car.Id == carToDelete.Id)
                         {
-                            mViewModel.ErrorMessage = "Es existiert ein Tankvorgang zu diesem Auto";
+                            mViewModel.ErrorMessage = "Es existiert ein Tankvorgang zu diesem Fahrzeug";
                             refuelExists = true;
                         }
                     }
@@ -452,11 +456,12 @@ namespace Fuel.Manager.Client.Controllers
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Auto konnte nicht gelöscht werden";
+                        mViewModel.ErrorMessage = "Fahrzeug konnte nicht gelöscht werden";
                     }
 
                     LoadAllCars();
                     CarController.SetControllerData(allCars);
+                    mViewModel.SuccessMessage = "Fahrzeug wurde erfolgreich gelöscht";
                     break;
 
                 case "Mitarbeiter":
@@ -465,7 +470,7 @@ namespace Fuel.Manager.Client.Controllers
 
                     if (EmployeeController.GetCarsOfEmployee().Count() > 0)
                     {
-                        mViewModel.ErrorMessage = "Es sind Autos mit dem Mitarbeiter verknüpft";
+                        mViewModel.ErrorMessage = "Es sind Fahrzeuge mit dem Mitarbeiter verknüpft";
                         break;
                     }
 
@@ -474,7 +479,7 @@ namespace Fuel.Manager.Client.Controllers
                     var data = new Dictionary<string, string>
                     {
                         { "id", employeeToDelete.Id.ToString() },
-                        { "username", employeeToDelete.Username },
+                        { "username", employeeToDelete.Username.ToLower() },
                         { "password", EmployeeController.GetEmployeePassword() },
                         { "firstname", employeeToDelete.Firstname },
                         { "lastname", employeeToDelete.Lastname },
@@ -489,34 +494,14 @@ namespace Fuel.Manager.Client.Controllers
                     code = response.StatusCode.ToString();
                     if (code != "OK")
                     {
-                        mViewModel.ErrorMessage = "Benutzer konnte nicht gelöscht werden";
+                        mViewModel.ErrorMessage = "Mitarbeiter konnte nicht gelöscht werden";
                     }
 
                     LoadAllEmployees();
+                    mViewModel.SuccessMessage = "Mitarbeiter wurde erfolgreich gelöscht";
                     break;
             }
         }
-
-        //TODO Löschen?
-        /*public async void GetCarsAndRefuelsFromLoggedInEmployee()
-        {
-            HttpClient client = new HttpClient();
-
-            var data = new Dictionary<string, string>
-            {
-                { "employeeid", loggedInUser.Id.ToString() }
-            };
-
-            var values = JsonHelper.DictionaryToJson(data);
-
-            var response = await client.PostAsync("http://localhost:5115/api/employee/refuels",
-                new StringContent(values, Encoding.UTF8, "application/json"));
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            refuelsLoggedInUser = Mapper.JsonToRefuelList(responseString);
-
-            refuelsLoggedInUser = refuelsLoggedInUser.OrderBy(r => r.Date).ToList();
-        }*/
 
         public async void LoadCarsAndRefuelsFromAllEmployees()
         {

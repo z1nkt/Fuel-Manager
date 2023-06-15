@@ -21,8 +21,8 @@
         </ListView>
         <Label HorizontalAlignment="Center" MinHeight="35" Foreground="#FFDA1C1C" />
         <WrapPanel HorizontalAlignment="Center">
-            <Button Content="Verknüpfen" Command="{Binding AddCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0" Background="#FF324ACA" FontSize="16" FontWeight="Bold" Foreground="White" />
-            <Button Content="Abbrechen" Command="{Binding CancelCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0" Foreground="White" FontSize="16" FontWeight="Bold" Background="#FF324ACA"/>
+            <Button Content="✔ Verknüpfen " Command="{Binding AddCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="120" Margin="0,0,10,0" Background="#FF324ACA" FontSize="16" FontWeight="Bold" Foreground="White" />
+            <Button Content="❌ Abbrechen " Command="{Binding CancelCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" Margin="0,0,10,0" Foreground="White" FontSize="16" FontWeight="Bold" Background="#FF324ACA"/>
         </WrapPanel>
     </StackPanel>
 </Window>

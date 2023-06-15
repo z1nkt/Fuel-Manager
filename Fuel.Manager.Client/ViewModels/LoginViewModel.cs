@@ -15,7 +15,7 @@ namespace Fuel.Manager.Client.ViewModels
     public class LoginViewModel : ViewModelBase
     {
 
-        public LoginModel Model { get; set; }
+        //public LoginModel Model { get; set; }
         private string _userName;
 
         public string Username
@@ -73,7 +73,7 @@ namespace Fuel.Manager.Client.ViewModels
 
         public LoginViewModel()
         {
-            Model = new LoginModel();
+            //Model = new LoginModel();
             ErrorMessage = "";
         }
 

@@ -5,18 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel.Manager.Client.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fuel-Manger" Height="450" Width="800">
     <DockPanel LastChildFill="False" Margin="15,15,0,0">
         <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,20">
-            <Button Command="{Binding NewCommand}" Content="Neu" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
-            <Button Command="{Binding EditCommand}" Content="Bearbeiten" Width="NaN" Margin="0,0,10,0"/>
-            <Button Command="{Binding SaveCommand}" Content="Speichern" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
-            <Button Command="{Binding DeleteCommand}" Content="Löschen" Width="NaN" Margin="0,0,10,0" MinWidth="80"/>
+            <Image Source="/Ressources/Tankstelle.png" Height="69" Width="80"></Image>
+            <Button Command="{Binding NewCommand}" Content="Neu" Width="NaN" Margin="60,0,10,0" MinWidth="80" Background="#FF324ACA" FontSize="12" FontWeight="Bold" Foreground="White" MaxHeight="30"/>
+            <Button Command="{Binding EditCommand}" Content="Bearbeiten" Width="NaN" Margin="0,0,10,0" MinWidth="80" MaxHeight="30" Background="#FF324ACA" FontSize="12" FontWeight="Bold" Foreground="White"/>
+            <Button Command="{Binding SaveCommand}" Content="Speichern" Width="NaN" Margin="0,0,10,0" MinWidth="80" MaxHeight="30"  Background="#FF324ACA" FontSize="12" FontWeight="Bold" Foreground="White"/>
+            <Button Command="{Binding DeleteCommand}" Content="Löschen" Width="NaN" Margin="0,0,10,0" MinWidth="80"  MaxHeight="30" Background="#FF324ACA" FontSize="12" FontWeight="Bold" Foreground="White"/>
             <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
             <Label Content="{Binding SuccessMessage}" Foreground="#FF60DA1C" FontWeight="Bold"/>
         </WrapPanel>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,20">
+            <Rectangle RenderTransformOrigin="0.5,0.5" MinWidth="775" Height="5" Fill="Black" />
+        </WrapPanel>
         <StackPanel DockPanel.Dock="Left" MinWidth="200" Margin="0,0,22,0">
-            <Label Content="Modus"/>
             <ListBox ItemsSource="{Binding Mode}" SelectedItem="{Binding SelectedMode}"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" MinWidth="600" Width="542">

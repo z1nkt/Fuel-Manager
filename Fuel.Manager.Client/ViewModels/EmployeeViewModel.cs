@@ -48,7 +48,6 @@ namespace Fuel.Manager.Client.ViewModels
                     Firstname = _SelectedEmployee.Firstname;
                     Lastname = _SelectedEmployee.Lastname;
                     IsAdmin = _SelectedEmployee.IsAdmin;
-                    Password = _SelectedEmployee.Password;
 
                     EmployeeController.GetCarsFromEmployeeID(_SelectedEmployee.Id);
                 }

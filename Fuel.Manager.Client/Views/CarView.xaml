@@ -8,13 +8,36 @@
         mc:Ignorable="d">
     <StackPanel>
         <Label Content="{Binding ErrorMessage}" Foreground="#FFDA1C1C" FontWeight="Bold"/>
-        <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:Car}">
-                    <WrapPanel>
-                        <TextBlock Text="{Binding LicensePlate}" MinWidth="160" MaxWidth="200"/>
-                        <TextBlock Text="{Binding Vendor}" MinWidth="160" MaxWidth="150"/>
-                        <TextBlock Text="{Binding Model}" MinWidth="160" MaxWidth="150"/>
+        <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}" Margin="0,0,0,5" MaxHeight="150" MaxWidth="500" HorizontalAlignment="Left" MinWidth="500" MinHeight="150" BorderBrush="Black" BorderThickness="1">
+            <ListBox.Template>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <Grid DockPanel.Dock="Top" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="160"></ColumnDefinition>
+                                <ColumnDefinition MinWidth="160"></ColumnDefinition>
+                                <ColumnDefinition MinWidth="160"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" HorizontalAlignment="Left">Kennzeichen</Label>
+                            <Label Grid.Column="1" HorizontalAlignment="Left">Hersteller</Label>
+                            <Label Grid.Column="2" HorizontalAlignment="Left">Modell</Label>
+                        </Grid>
+                        <ItemsPresenter></ItemsPresenter>
+                    </DockPanel>
+                </ControlTemplate>
+            </ListBox.Template>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate >
+                <DataTemplate DataType="{x:Type models:Car}" >
+                    <WrapPanel Margin="0,0,0,5">
+                        <TextBlock Text="{Binding LicensePlate}" MinWidth="160" />
+                        <TextBlock Text="{Binding Vendor}" MinWidth="160" />
+                        <TextBlock Text="{Binding Model}" MinWidth="160" />
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -22,15 +45,15 @@
         <StackPanel IsEnabled="{Binding IsEnabled}">
             <WrapPanel Margin="0,0,0,5">
                 <Label Content="Kennzeichen" MinWidth="100"/>
-                <TextBox Text="{Binding LicensePlate}" MinWidth="100"/>
+                <TextBox Text="{Binding LicensePlate}" MaxWidth="200" MinWidth="200"/>
             </WrapPanel>
             <WrapPanel Margin="0,0,0,5">
                 <Label Content="Hersteller" MinWidth="100"/>
-                <TextBox Text="{Binding Vendor}" MinWidth="100"/>
+                <TextBox Text="{Binding Vendor}" MaxWidth="200" MinWidth="200"/>
             </WrapPanel>
             <WrapPanel Margin="0,0,0,5">
                 <Label Content="Modell" MinWidth="100"/>
-                <TextBox Text="{Binding Model}" MinWidth="100"/>
+                <TextBox Text="{Binding Model}" MinWidth="200" MaxWidth="200"/>
             </WrapPanel>
         </StackPanel>
 
