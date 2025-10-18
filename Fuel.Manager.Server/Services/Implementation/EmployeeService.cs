@@ -43,8 +43,6 @@ namespace Fuel.Manager.Server.Services.Implementation
         public Employee Login(string username, string password)
         {
             Employee e = _employeeRepository.GetByUsername(username);
-            Console.WriteLine(e.Password);
-            Console.WriteLine(e.Username);
 
             if (e == null)
             {
